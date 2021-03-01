@@ -2,7 +2,7 @@
 ;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;
 ;;;;;;;;;;;
-;Gebiet;Ruckowitz;;;;;;;;;
+;Gebiet;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz
 ;Plot-ID;Ruc-Berg-1;Ruc-Berg-2;Ruc-Nar-1;Ruc-Nar-2;Ruc-Nar-3;Ruc-Nar-4;Ruc-Nar-5;Ruc-Berg-3;Ruc-Berg-4;Ruc-Berg-5
 ;DB_Jehl_Aufnahmefläche;;;;;;;;;;
 ;DB_Jehl_Aufnahme;;;;;;;;;;
@@ -20,13 +20,13 @@
 ;Gräser Höhe (cm);80;73;70;83;82;62;68;81;76;79
 ;Kräuter Deckung (%);60;45;25;20;20;38;15;52;55;65
 ;Kräuter Höhe (cm);35;40;42;31;20;23;12;44;38;56
-;vegetation ohne moos;95;78;95;90;95;98;80;95;90;95
-;offen;;2;1;1;1;;1;;;1
-;Wasser Deckung;;;;;;;;;;
+;Vegetation ohne moos;95;78;95;90;95;98;80;95;90;95
+;Offen;;2;1;1;1;;1;;;1
+;Wasser;;;;;;;;;;
 ;Baumschicht (%);;;;;;;;;;
 ;Baumschicht (Höhe);;;;;;;;;;
-;slope;;;;;;;;;;
-;exposition;;;;;;;;;;
+;Slope;;;;;;;;;;
+;Exposition;;;;;;;;;;
 ;;;;;;;;;;;
 g;Agrostis capillaris;8;10;0,5;2;5;5;1;12;15;12
 g;Agrostis canina;;;;;;;;;;
@@ -168,5 +168,5 @@ m;Rhytidiadelphus squarrosus;;;;;;;;;;
 ;Andere:;;;;;;;;;;
 ;Gentiana panonica;;;;2;;;;;;
 ;Trientalis europea;;;;;;0,1;0,1;;;
-;Picea arbeis;;;;;;;0,1;;;
-;cirsium heterophylum;;;;;;;;;22;25
+;Picea abeis;;;;;;;0,1;;;
+;Cirsium heterophylum;;;;;;;;;22;25

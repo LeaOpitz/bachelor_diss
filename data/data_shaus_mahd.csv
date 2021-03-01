@@ -20,9 +20,9 @@
 ;Gräser Höhe (cm);90;83;89;45;92;83;90;90;61;58;60;76;82;74;72
 ;Kräuter Deckung (%);40;50;30;10;40;40;42;25;20;1;0,3;3;45;38;45
 ;Kräuter Höhe (cm);28;31;32;25;44;45;46;54;20;6;12;6;26;25;23
-;wasser;;;;;2;;;;;;;;;;
-;offen;3;1;0;7;;;0,5;;2;3;3;4;2;4;
-;vegetation ohne moos;90;97;90;80;96;95;95;70;70;60;70;78;95;83;98
+;Wasser;;;;;2;;;;;;;;;;
+;Offen;3;1;0;7;;;0,5;;2;3;3;4;2;4;
+;Vegetation ohne moos;90;97;90;80;96;95;95;70;70;60;70;78;95;83;98
 ;Baumschicht (%);;;;;;;;;;;;;;;
 ;Baumschicht (Höhe);;;;;;;;;;;;;;;
 ;Slope;;;;;2;2;;;;;;;;;
@@ -166,17 +166,17 @@ m;Rhytidiadelphus squarrosus;;;;;;;;;;;;;;;
 ;Anmerkung:;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;
 ;Weitere:;;;;;;;;;;;;;;;
-;carex canescens;;;30;;;40;;;;;;;;;
-;cirsium heterophylum;;;0,3;;;;;;;;;;;;
-;cirsium palustre;;;0,1;;;1;;;;;;;;;
-;phyteuma nigrum;;;;;0,5;;;;;;;;;;
-;calta palustris;;;;;0,3;1;;;;;;;;;
-;alopecurus pratensis;;;;;;0,1;;;;;;;;;
-;epilobium angustifolium;;;;;;;0,1;0,1;;;;;;;
-;digitalis purpurea;;;;;;;;0,3;;;;;;;
-;epilobium breit (wie 2&3);;;;;;;0,5;1;;;;;;;
-;epilobium schmal;;;;;;;1;0,5;;;;;;;
-;sorbus aucuparia;;;;;;;;;0,1;;;;;;
-;silene dioica;;;;;;;;;;;;;;;0,1
+;Carex canescens;;;30;;;40;;;;;;;;;
+;Cirsium heterophylum;;;0,3;;;;;;;;;;;;
+;Cirsium palustre;;;0,1;;;1;;;;;;;;;
+;Phyteuma nigrum;;;;;0,5;;;;;;;;;;
+;Calta palustris;;;;;0,3;1;;;;;;;;;
+;Alopecurus pratensis;;;;;;0,1;;;;;;;;;
+;Epilobium angustifolium;;;;;;;0,1;0,1;;;;;;;
+;Digitalis purpurea;;;;;;;;0,3;;;;;;;
+;Epilobium breit (wie 2&3);;;;;;;0,5;1;;;;;;;
+;Epilobium schmal;;;;;;;1;0,5;;;;;;;
+;Sorbus aucuparia;;;;;;;;;0,1;;;;;;
+;Silene dioica;;;;;;;;;;;;;;;0,1
 ;;;;;;;;;;;;;;;;
 ;Anzahl Arten;18;16;23;8;32;23;23;24;14;6;4;5;15;14;11

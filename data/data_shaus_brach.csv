@@ -20,9 +20,9 @@
 ;Gräser Höhe (cm);78;62;100;47;50;42;61;79;70;72;59;41;42;74;51
 ;Kräuter Deckung (%);45;1;1;1;0,1;0,5;53;50;50;53;3;5;5;25;1
 ;Kräuter Höhe (cm);34;38;26;27;33;43;32;39;23;30;23;11;26;30;22
-;wasser;;;;;;;;;;;;;;;
-;offen;;;;;;;0,5;;;;2;;;;1
-;vegetation ohne moos;90;70;80;;98;95;97;98;97;98;70;70;80;85;80
+;Wasser;;;;;;;;;;;;;;;
+;Offen;;;;;;;0,5;;;;2;;;;1
+;Vegetation ohne moos;90;70;80;;98;95;97;98;97;98;70;70;80;85;80
 ;Baumschicht (%);;;;;;;;;;;;;;;
 ;Baumschicht (Höhe);;;;;;;;;;;;;;;
 ;Slope;;;;;;;;;;;;;;;
@@ -167,8 +167,8 @@ m;Rhytidiadelphus squarrosus;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;
 ;Weitere:;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;
-;alopecurus pratensis;0,1;;;;;;;;;;;;;;
-;leucanthemum vulgare;1;;;;;;0,3;0,3;;0,3;;;;;
-;vicia cracca;3;;;;;;;;0,3;;;;;;
-;silene dioica;;;;;;;;;;0,1;;;;;
-;sorbus aucuparia;;;;;;;;;;;0,1;;;;
+;Alopecurus pratensis;0,1;;;;;;;;;;;;;;
+;Leucanthemum vulgare;1;;;;;;0,3;0,3;;0,3;;;;;
+;Vicia cracca;3;;;;;;;;0,3;;;;;;
+;Silene dioica;;;;;;;;;;0,1;;;;;
+;Sorbus aucuparia;;;;;;;;;;;0,1;;;;
