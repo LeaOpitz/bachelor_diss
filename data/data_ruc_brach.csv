@@ -1,171 +1,171 @@
-﻿sp;;;;;;;;;;
-[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;
-Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;
-;;;;;;;;;;
-Gebiet;Ruckowitz;;;;;;;;;
-Plot-ID;Ruc-NarU-1;Ruc-NarU-2;Ruc-NarU-3;Ruc-CaBi-1;Ruc-CaBi-2;Ruc-CaBi-3;Ruc-CaBi-4;Ruc-CaBi-5;Ruc-NarU-4;Ruc-NarU-5
-DB_Jehl_Aufnahmefläche;;;;;;;;;;
-DB_Jehl_Aufnahme;;;;;;;;;;
-Datum:      ;21.07.2020;21.07.2020;21.07.2020;21.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020
-Bearbeiter:;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea ;Lea;Lea;Lea;Lea;Lea
-Flächengröße;;;;;;;;;;
-Management;brach;brach;brach;brach;brach;brach;brach;brach;brach;brach
-Vegetation inkl. Terrestr. Kryptosg. Gesamt  (%);95;85;80;75;99;99;97;97;97;98
-Vegetation Obere  Höhe (cm);87;63;82;45;59;48;46;45;85;83
-Streu Deckung (%);20;25;40;100;100;100;100;100;90;90
-Höhe der Streuschicht (cm);4;2;7;8;8;17;6;9;5;6
-Moose Deckung (%);50;70;35;;;;;;40;35
-Moose Höhe (cm);5;2;2;;;;;;3,5;5
-Gräser Deckung (%);60;30;50;73;97;92;85;96;60;65
-Gräser Höhe (cm);87;63;82;45;52;41;38;35;85;83
-Kräuter Deckung (%);35;30;20;2;2;7;12;0,5;37;33
-Kräuter Höhe (cm);39;15;20;30;59;48;46;45;38;53
-vegetation ohne moos;92;60;70;75;99;99;97;97;97;98
-offen;;1;1;;;;;;;
-Wasser Deckung;;;;;;;;;;
-Baumschicht (%);;;;;;;;;;
-Baumschicht (Höhe);;;;;;;;;;
-slope;;;;;;;;;;
-exposition;;;;;;;;;;
-;;;;;;;;;;
-Agrostis capillaris;5;5;1;0,3;2;1;0,5;;4;7
-Agrostis canina;;;;;;;;;;
-Anthoxanthum odoratum;;;;;;;;;;
-Calamagrostis villosa;;;;;;;;;;
-Carex brizoides ;;;;72;95;91;84;96;;
-Carex demissa;;;;;;;;;;
-Carex echinata;;;;;;;;;;
-Carex flava agg.;;;;;;;;;;
-Carex flava s.str.;;;;;;;;;;
-Carex leporina;;;0,3;;;;;;;
-Carex nigra;15;10;5;;;;;;;
-Carex pallescens;;;;;;;;;;
-Carex panicea;;;;;;;;;;
-Carex pilulifera;5;0,3;0,3;;;;;;1;
-Carex rostrata;;;;;;;;;;
-Dactylis glomerata;;;;;;;;;;
-Deschampsia cespitosa;;;;;;;;;;
-Deschampsia flexuosa;;;;;;;;;;
-Eriophorum angustifolium;;;;;;;;;;
-Festuca rubra;15;1;3;;;;;;15;7
-Festuca rubra nicrescens;;;;;;;;;;
-Glyceria fluitans;;;;;;;;;;
-Holcus mollis;;;;;;;;;;
-Juncus articulatus;;;;;;;;;;
-Juncus bulbosus;;;;;;;;;;
-Juncus effusus;;;;;;;0,3;;;
-Juncus filiformis;;;;;;;;;;
-Juncus tenuis;;;;;;;;;;
-Luzula campestris;;;;;;;;;;
-Luzula multiflora;1;0,1;;;;;;;;
-Luzula sylvatica;;;;;;;;;;
-Nardus stricta;20;15;40;;;;;;40;50
-Phleum pratense;;;;;;;;;;
-Poa humilis;;;;;;;;;;
-Poa pratensis s.str.;2;;;;;;;;;
-Poa trivialis;;;;;;;;;;
-Poa supina;;;;;;;;;;
-Trisetum flavescens;;;;;;;;;;
-Acer pseudaplatanus;;;;;;;;;;
-Betula pendula juv.;;;;;;;;;;
-Fagus sylvatica juv.;;;;;;;;;;
-Picea abies B;;;;;;;;;;
-Picea abies juv.;;;;;;;;;;
-Sorbus aucuparia;;;;;;;;;;
-Achillea millefolium;;;;;;;;;;
-Ajuga reptans;;;;;;;;;;
-Alchemilla monticola;;;;;;;;;;
-Alchemilla vulgaris;;;;;;;;;;
-Anemone nemorosa;;;;;;;;;;
-Antriscus sylvestris;;;;;;;;;;
-Athyrium filix-femina;;;;;;;;;;
-Bistorta officinalis;;;;;;;;;;
-Caltha palustris ;;;;;;;;;;
-Campanula rotundifolia;;;;;;;;;;
-Cardamine amara;;;;;;;;;;
-Cardamine pratensis;;;;;;;;;;
-Callitriche palustris agg.;;;;;;;;;;
-Cerastium holosteoides;;;;;;;;;;
-Chaerophyllum hirsutum;;;;;;;;;;
-Chrysosplenium alternifolium;;;;;;;;;;
-Chrysosplenium oppositifolium;;;;;;;;;;
-Circaea alpina;;;;;;;;;;
-Cirsium palustre;;;;;;;;;;
-Crepis mollis;;;;;;;;;;
-Crepis paludosa;;;;;;;;;;
-Dactylorhiz fuchsii;;;;;;;;;;
-Dryopteris spec.;;;;;;;;;;
-Epilobium montanum;;;;;;;;;;
-Epilobium palustre;;;;;;;;;;
-Equisetum sylvaticum;;;;;;;;;;
-Ficaria verna;;;;;;;;;;
-Fragaria vesca;;;;;;;;;;
-Galeopsis tetrahit;1;;;2;2;7;12;0,5;0,1;
-Galium palustre;;;;;;;;;;
-Galium saxatile;15;12;12;;;;;;16;16
-Galium uliginosum;;;;;;;;;;
-Geranium sylvaticum;;;;;;;;;;
-Glechoma hederacea;;;;;;;;;;
-Heracleum sphondylium;;;;;;;;;;
-Hieracium lachenalii;;;;;;;;;;
-Hieracium lactucella;;;;;;;;;;
-Homogyne alpina;;;;;;;;;;
-Hypericum maculatum;;;;;;;;;;
-Impatiens glandulifera;;;;;;;;;;
-Lychnis flos-cuculi;;;;;;;;;;
-Lysimachia nemorum;;;;;;;;;;
-Lysimachia vulgaris;;;;;;;;;;
-Maianthemum bifolium;;;;;;;;;;
-Mentha arvensis;;;;;;;;;;
-Myosotis nemorosa;;;;;;;;;;
-Myosotis palustris;;;;;;;;;;
-Oxalis acetosella;0,1;;;;;;;;;
-Pedicularis sylvatica;;;;;;;;;;
-Pinguicula vulgaris;;;;;;;;;;
-Plantago lanceolata;;;;;;;;;;
-Potentilla erecta;1;;;;;;;;;
-Prunella vulgaris;;;;;;;;;;
-Ranunculus acris;;;;;;;;;;
-Ranunculus flammula;;;;;;;;;;
-Ranunculus repens;;;;;;;;;;
-Rhinanthus minor;;;;;;;;;;
-Rubus idaeus;;;;;;;;;;
-Rubus idaeus (juv.);;;;;;;;;;
-Rumex acetosa;;;;;;;;;;
-Rumex acetosella;15;5;3;;;;;;16;14
-Rumex arifolius;1;0,3;;;;;;;;0,1
-Rumex obtusifolius;;;;;;;;;;
-Senecio ovatus;;;;;;;;;;
-Senecio subalpinus;;;;;;;;;;
-Silene dioica;;;;;;;;;;
-Soldanella montana;;;;;;;;;;
-Stellaria alsine;;;;;;;;;;
-Stellaria graminea;2;;;;;;;;;
-Stellaria nemorum;;;;;;;;;;
-Stellaria spec.;;;;;;;;;;
-Taraxacum officinale;;;;;;;;;;
-Tephroseris crispa;;;;;;;;;;
-Trifolium pratense;;;;;;;;;;
-Trifolium repens;;;;;;;;;;
-Urtica dioica ;;;;;;;;;;
-Vaccinicum myrtillus;;3;5;;;;;;5;3
-Vaccinium myrtillus S;;;;;;;;;;
-Vaccinium vitis-idea;;;;;;;;;;
-Valeriana dioica;;;;;;;;;;
-Veronica beccabunga;;;;;;;;;;
-Veronica chamaedrys;;;;;;;;;;
-Veronica scutellata;;;;;;;;;;
-Veronica officinalis;;;;;;;;;;
-Viola palustris;;;;;;;;;;
-Willemetia stipitata;;;;;;;;;;
-Sphagnum sec. ;;;;;;;;;;
-Climatium dendroides;;;;;;;;;;
-Plagiomnium undulatum;;;;;;;;;;
-Pellia epiphylla;;;;;;;;;;
-Rhytidiadelphus squarrosus;;;;;;;;;;
-Anmerkung:;waldähnlich;;;;;;;;;
-;;;;;;;;;;
-Weitere;;;;;;;;;;
-sorbius aucoparia;;;;;;;;;;0,3
-acer pseudoplatanus;0,1;;;;;;;;;
-picea abeis;;0,1;;;;;;;;
+﻿;sp;;;;;;;;;;
+;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;
+;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;
+;;;;;;;;;;;
+;Gebiet;Ruckowitz;;;;;;;;;
+;Plot-ID;Ruc-NarU-1;Ruc-NarU-2;Ruc-NarU-3;Ruc-CaBi-1;Ruc-CaBi-2;Ruc-CaBi-3;Ruc-CaBi-4;Ruc-CaBi-5;Ruc-NarU-4;Ruc-NarU-5
+;DB_Jehl_Aufnahmefläche;;;;;;;;;;
+;DB_Jehl_Aufnahme;;;;;;;;;;
+;Datum:      ;21.07.2020;21.07.2020;21.07.2020;21.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020
+;Bearbeiter:;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea ;Lea;Lea;Lea;Lea;Lea
+;Flächengröße;;;;;;;;;;
+;Management;brach;brach;brach;brach;brach;brach;brach;brach;brach;brach
+;Vegetation inkl. Terrestr. Kryptosg. Gesamt  (%);95;85;80;75;99;99;97;97;97;98
+;Vegetation Obere  Höhe (cm);87;63;82;45;59;48;46;45;85;83
+;Streu Deckung (%);20;25;40;100;100;100;100;100;90;90
+;Höhe der Streuschicht (cm);4;2;7;8;8;17;6;9;5;6
+;Moose Deckung (%);50;70;35;;;;;;40;35
+;Moose Höhe (cm);5;2;2;;;;;;3,5;5
+;Gräser Deckung (%);60;30;50;73;97;92;85;96;60;65
+;Gräser Höhe (cm);87;63;82;45;52;41;38;35;85;83
+;Kräuter Deckung (%);35;30;20;2;2;7;12;0,5;37;33
+;Kräuter Höhe (cm);39;15;20;30;59;48;46;45;38;53
+;vegetation ohne moos;92;60;70;75;99;99;97;97;97;98
+;offen;;1;1;;;;;;;
+;Wasser Deckung;;;;;;;;;;
+;Baumschicht (%);;;;;;;;;;
+;Baumschicht (Höhe);;;;;;;;;;
+;slope;;;;;;;;;;
+;exposition;;;;;;;;;;
+;;;;;;;;;;;
+g;Agrostis capillaris;5;5;1;0,3;2;1;0,5;;4;7
+g;Agrostis canina;;;;;;;;;;
+g;Anthoxanthum odoratum;;;;;;;;;;
+g;Calamagrostis villosa;;;;;;;;;;
+g;Carex brizoides ;;;;72;95;91;84;96;;
+g;Carex demissa;;;;;;;;;;
+g;Carex echinata;;;;;;;;;;
+g;Carex flava agg.;;;;;;;;;;
+g;Carex flava s.str.;;;;;;;;;;
+g;Carex leporina;;;0,3;;;;;;;
+g;Carex nigra;15;10;5;;;;;;;
+g;Carex pallescens;;;;;;;;;;
+g;Carex panicea;;;;;;;;;;
+g;Carex pilulifera;5;0,3;0,3;;;;;;1;
+g;Carex rostrata;;;;;;;;;;
+g;Dactylis glomerata;;;;;;;;;;
+g;Deschampsia cespitosa;;;;;;;;;;
+g;Deschampsia flexuosa;;;;;;;;;;
+g;Eriophorum angustifolium;;;;;;;;;;
+g;Festuca rubra;15;1;3;;;;;;15;7
+g;Festuca rubra nicrescens;;;;;;;;;;
+g;Glyceria fluitans;;;;;;;;;;
+g;Holcus mollis;;;;;;;;;;
+g;Juncus articulatus;;;;;;;;;;
+g;Juncus bulbosus;;;;;;;;;;
+g;Juncus effusus;;;;;;;0,3;;;
+g;Juncus filiformis;;;;;;;;;;
+g;Juncus tenuis;;;;;;;;;;
+g;Luzula campestris;;;;;;;;;;
+g;Luzula multiflora;1;0,1;;;;;;;;
+g;Luzula sylvatica;;;;;;;;;;
+g;Nardus stricta;20;15;40;;;;;;40;50
+g;Phleum pratense;;;;;;;;;;
+g;Poa humilis;;;;;;;;;;
+g;Poa pratensis s.str.;2;;;;;;;;;
+g;Poa trivialis;;;;;;;;;;
+g;Poa supina;;;;;;;;;;
+g;Trisetum flavescens;;;;;;;;;;
+b;Acer pseudaplatanus;;;;;;;;;;
+b;Betula pendula juv.;;;;;;;;;;
+b;Fagus sylvatica juv.;;;;;;;;;;
+b;Picea abies B;;;;;;;;;;
+b;Picea abies juv.;;;;;;;;;;
+b;Sorbus aucuparia;;;;;;;;;;
+k;Achillea millefolium;;;;;;;;;;
+k;Ajuga reptans;;;;;;;;;;
+k;Alchemilla monticola;;;;;;;;;;
+k;Alchemilla vulgaris;;;;;;;;;;
+k;Anemone nemorosa;;;;;;;;;;
+k;Antriscus sylvestris;;;;;;;;;;
+k;Athyrium filix-femina;;;;;;;;;;
+k;Bistorta officinalis;;;;;;;;;;
+k;Caltha palustris ;;;;;;;;;;
+k;Campanula rotundifolia;;;;;;;;;;
+k;Cardamine amara;;;;;;;;;;
+k;Cardamine pratensis;;;;;;;;;;
+k;Callitriche palustris agg.;;;;;;;;;;
+k;Cerastium holosteoides;;;;;;;;;;
+k;Chaerophyllum hirsutum;;;;;;;;;;
+k;Chrysosplenium alternifolium;;;;;;;;;;
+k;Chrysosplenium oppositifolium;;;;;;;;;;
+k;Circaea alpina;;;;;;;;;;
+k;Cirsium palustre;;;;;;;;;;
+k;Crepis mollis;;;;;;;;;;
+k;Crepis paludosa;;;;;;;;;;
+k;Dactylorhiz fuchsii;;;;;;;;;;
+k;Dryopteris spec.;;;;;;;;;;
+k;Epilobium montanum;;;;;;;;;;
+k;Epilobium palustre;;;;;;;;;;
+k;Equisetum sylvaticum;;;;;;;;;;
+k;Ficaria verna;;;;;;;;;;
+k;Fragaria vesca;;;;;;;;;;
+k;Galeopsis tetrahit;1;;;2;2;7;12;0,5;0,1;
+k;Galium palustre;;;;;;;;;;
+k;Galium saxatile;15;12;12;;;;;;16;16
+k;Galium uliginosum;;;;;;;;;;
+k;Geranium sylvaticum;;;;;;;;;;
+k;Glechoma hederacea;;;;;;;;;;
+k;Heracleum sphondylium;;;;;;;;;;
+k;Hieracium lachenalii;;;;;;;;;;
+k;Hieracium lactucella;;;;;;;;;;
+k;Homogyne alpina;;;;;;;;;;
+k;Hypericum maculatum;;;;;;;;;;
+k;Impatiens glandulifera;;;;;;;;;;
+k;Lychnis flos-cuculi;;;;;;;;;;
+k;Lysimachia nemorum;;;;;;;;;;
+k;Lysimachia vulgaris;;;;;;;;;;
+k;Maianthemum bifolium;;;;;;;;;;
+k;Mentha arvensis;;;;;;;;;;
+k;Myosotis nemorosa;;;;;;;;;;
+k;Myosotis palustris;;;;;;;;;;
+k;Oxalis acetosella;0,1;;;;;;;;;
+k;Pedicularis sylvatica;;;;;;;;;;
+k;Pinguicula vulgaris;;;;;;;;;;
+k;Plantago lanceolata;;;;;;;;;;
+k;Potentilla erecta;1;;;;;;;;;
+k;Prunella vulgaris;;;;;;;;;;
+k;Ranunculus acris;;;;;;;;;;
+k;Ranunculus flammula;;;;;;;;;;
+k;Ranunculus repens;;;;;;;;;;
+k;Rhinanthus minor;;;;;;;;;;
+k;Rubus idaeus;;;;;;;;;;
+k;Rubus idaeus (juv.);;;;;;;;;;
+k;Rumex acetosa;;;;;;;;;;
+k;Rumex acetosella;15;5;3;;;;;;16;14
+k;Rumex arifolius;1;0,3;;;;;;;;0,1
+k;Rumex obtusifolius;;;;;;;;;;
+k;Senecio ovatus;;;;;;;;;;
+k;Senecio subalpinus;;;;;;;;;;
+k;Silene dioica;;;;;;;;;;
+k;Soldanella montana;;;;;;;;;;
+k;Stellaria alsine;;;;;;;;;;
+k;Stellaria graminea;2;;;;;;;;;
+k;Stellaria nemorum;;;;;;;;;;
+k;Stellaria spec.;;;;;;;;;;
+k;Taraxacum officinale;;;;;;;;;;
+k;Tephroseris crispa;;;;;;;;;;
+k;Trifolium pratense;;;;;;;;;;
+k;Trifolium repens;;;;;;;;;;
+k;Urtica dioica ;;;;;;;;;;
+k;Vaccinicum myrtillus;;3;5;;;;;;5;3
+k;Vaccinium myrtillus S;;;;;;;;;;
+k;Vaccinium vitis-idea;;;;;;;;;;
+k;Valeriana dioica;;;;;;;;;;
+k;Veronica beccabunga;;;;;;;;;;
+k;Veronica chamaedrys;;;;;;;;;;
+k;Veronica scutellata;;;;;;;;;;
+k;Veronica officinalis;;;;;;;;;;
+k;Viola palustris;;;;;;;;;;
+k;Willemetia stipitata;;;;;;;;;;
+m;Sphagnum sec. ;;;;;;;;;;
+m;Climatium dendroides;;;;;;;;;;
+m;Plagiomnium undulatum;;;;;;;;;;
+m;Pellia epiphylla;;;;;;;;;;
+m;Rhytidiadelphus squarrosus;;;;;;;;;;
+;Anmerkung:;waldähnlich;;;;;;;;;
+;;;;;;;;;;;
+;Weitere;;;;;;;;;;
+;sorbius aucoparia;;;;;;;;;;0,3
+;acer pseudoplatanus;0,1;;;;;;;;;
+;picea abeis;;0,1;;;;;;;;
