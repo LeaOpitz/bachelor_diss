@@ -27,4 +27,13 @@ haus_m <- read.csv2("data/data_shaus_mahd.csv") # delete 165-167, 180/181
 #longform gather()
 
 #combine datasets full_join()
-all_data <- full_join(hoch, ruc_b, ruc_w, haus_b, haus_m, by = Tipp für die nächste Evaluierung: Poa mit Herbarbelgen differenzieren)
+all_haus <- full_join(haus_b, haus_m, by = "sp")
+all_ruc <- full_join(ruc_b, ruc_w, by = "sp")
+all_weide <- full_join(all_ruc, hoch1, by = "sp")
+all_data <- full_join(all_weide, all_haus, by = "sp") 
+  
+all_data <- all_data %>% mutate_all(na_if,"") %>%  #replace empty cells with NA
+  drop_na(sp) %>% #remove empty columns
+  filter(!(sp %in% c("Anzahl Arten", "Andere:", "Weitere:", "Anmerkung:", "Weitere")))
+
+data_long <- gather(all_data, "Plot-ID", "sp")
