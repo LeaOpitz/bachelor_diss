@@ -22,7 +22,7 @@
 ;Kräuter Höhe (cm);39;15;20;30;59;48;46;45;38;53
 ;Vegetation ohne moos;92;60;70;75;99;99;97;97;97;98
 ;Offen;;1;1;;;;;;;
-;Wasser ;;;;;;;;;;
+;Wasser;;;;;;;;;;
 ;Baumschicht (%);;;;;;;;;;
 ;Baumschicht (Höhe);;;;;;;;;;
 ;Slope;;;;;;;;;;
@@ -168,4 +168,4 @@ m;Rhytidiadelphus squarrosus;;;;;;;;;;
 ;Weitere;;;;;;;;;;
 ;Sorbus aucuparia;;;;;;;;;;0,3
 ;Acer pseudoplatanus;0,1;;;;;;;;;
-;Picea abeis;;0,1;;;;;;;;
+;Picea abies;;0,1;;;;;;;;

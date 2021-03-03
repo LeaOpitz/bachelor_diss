@@ -1,7 +1,7 @@
 ;sp;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Hoschachten hat per se keine Feuchtwiese;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Diese drei Plots könnte man mal vergleichen, ob das ähnlich ist (allerdings haben die eine Baumdach, man könnte aber auch überlegen alle Bäume für die asuwertung wegzulassen);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Bergmähwiesen (evtl findet man noch eine 5te?);;;;;;;;Für einen Vergleich zu anderen Feuchtwiesen: entweder die Arten in der Taeblle vergleichen oder Ordination;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Gebiet;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;
 ;Vegetationstyp;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Calthion;;Calthion;;Calthion/Carex brizoides Ü;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Nardetum;;Nardetum;;Nardetum;;Nardetum;;Nardetum;
 ;Plot-ID;1a;;1b;;1c;;1d;;1e;;2a;;2b;;2c;;2d;;2e;;3a;;3b;;3c;;3d;;4a;;4b;;4c;;4d;;5a;;5b;;5c;;8a;;8b;;8c;;8d;;8e;;9a;;9b;;9c;;9d;;10a;;10b;;10c;;10d;;11a;;11b;;11c;;11d;;12a;;12b;;12c;;12d;;12e;
 ;DB_Jehl_Aufnahmefläche;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -16,7 +16,7 @@
 ;Vegetation Obere  average Höhe (cm);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Streu Deckung (%);60;;;;30;;60;;50;;;;;;;;35;;;;20;;40;;35;;40;;;;;;60;;20;;20;;10;;;;;;50;;;;60;;30;;20;;20;;80;;;;70;;15;;60;;70;;30;;60;;60;;25;;30;;60;;70;;80;;75;
 ;Höhe der Streuschicht (cm);1;;1,5;;5;;7;;3;;4;;5;;1;;9;;;;1,5;;3;;;;1;;2;;7;;6;;1;;3;;5;;8;;3;;8;;4;;5;;1;;5;;6;;7;;3;;3;;7;;3;;4;;7;;3;;5;;4;;9;;4;;3;;6;;6;
-;Offenboden (%);1;;3;;5;;1;;1;;;;;;1;;3;;;;3;;;;1;;1;;;;1;;0,5;;1;;5;;0;;0;;1;;3;;5;;3;;12;;0;;0;;0;;0;;10;;15;;0;;;;0,5;;0,5;;0;;10;;;;0,5;;;;;;;
+;Offen;1;;3;;5;;1;;1;;;;;;1;;3;;;;3;;;;1;;1;;;;1;;0,5;;1;;5;;0;;0;;1;;3;;5;;3;;12;;0;;0;;0;;0;;10;;15;;0;;;;0,5;;0,5;;0;;10;;;;0,5;;;;;;;
 ;Moose Deckung (%);10;;5;;50;;3;;10;;2;;50;;60;;15;;5;;40;;25;;50;;40;;20;;20;;30;;15;;30;;80;;0;;;;50;;;;20;;5;;60;;60;;1;;1;;15;;5;;25;;10;;15;;30;;30;;25;;75;;30;;20;;50;;20;
 ;Moose Höhe (cm);2;;3;;3,5;;2;;3;;3;;4;;2;;3;;0,5;;;;2;;2;;0,5;;2;;1;;2;;1;;3;;4;;;;;;1;;3;;3;;1;;3;;4;;3;;2;;2;;1;;2,5;;3;;1;;3;;4;;3;;6;;4,5;;3;;2;;4;
 ;Gräser Deckung (%);82;;45;;42;;50;;45;;15;;40;;35;;55;;40;;50;;50;;40;;45;;60;;50;;50;;40;;50;;55;;65;;73;;12;;25;;35;;30;;46;;50;;65;;53;;20;;30;;45;;65;;40;;42;;50;;35;;50;;35;;40;;45;;45;
@@ -24,8 +24,8 @@
 ;Kräuter Deckung (%);10;;40;;42;;20;;40;;55;;45;;45;;25;;35;;40;;45;;50;;45;;30;;30;;45;;50;;35;;38;;34;;22;;80;;50;;50;;50;;46;;48;;30;;45;;45;;40;;48;;30;;58;;55;;40;;45;;38;;60;;52;;50;;50;
 ;Kräuter Höhe (cm);;;43;;;;27;;46;;20;;11;;;;;;18;;19;;38;;;;31;;77;;;;73;;40;;49;;;;57;;30;;39;;37;;15;;;;;;21;;31;;35;;;;9;;;;;;19;;22;;27;;16;;39;;;;;;34;;;
 ;MW Kräuter Höhe (cm);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Felsen Deckung;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Wasser Deckung;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Wasser;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Baumschicht (%);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Baumschicht (Höhe);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;shrub  layer %;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -190,7 +190,7 @@ m;Pellia epiphylla;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 m;Plagiomnium undulatum;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 m;Polytrichum sp.;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 m;Sphagnum sec. ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-s;Picea abies S;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+s;Picea abies;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 s;Vaccinium myrtillus S;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
