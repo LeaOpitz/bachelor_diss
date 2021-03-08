@@ -6,6 +6,8 @@
 
 #libraries
 library(tidyverse)
+library(janitor)
+
 
 #load data ----
 
@@ -24,25 +26,26 @@ hoch_c <- read.csv2("data/veg_hoc_2020.csv") #agr 4a-d, nar 12, cal5ab?
 ## data wrangling ----
 
 #combine datasets full_join()
-all_haus <- full_join(haus_b, haus_m, by = "sp")
-all_ruc <- full_join(ruc_b, ruc_w, by = "sp")
-all_weide <- full_join(all_ruc, hoch1, by = "sp")
-all_mine <- full_join(all_weide, all_haus, by = "sp") 
 
-all_mine <- all_mine %>% mutate_all(na_if,"") %>%  #replace empty cells with NA
+all_mine <- full_join(haus_b, haus_m, by = c("ï..Type", "sp")) %>% 
+  full_join(hoch1, by = c("ï..Type", "sp")) %>% 
+  full_join(ruc_b, by = c("ï..Type", "sp")) %>% 
+  full_join(ruc_w, by = c("ï..Type", "sp")) %>% 
+  mutate_all(na_if,"") %>%  #replace empty cells with NA
   drop_na(sp) %>% #remove empty columns
   filter(!(sp %in% c("Anzahl Arten", "Andere:", "Weitere:", "Anmerkung:", "Weitere", 
                      "Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nÃ¶tig",
                      "[] = diese Art ist auÃŸerhalb des Plotes gewachsen")))
 
+str(hoch1)
 #select suitable plots
-#ruc_c2 <- ruc_c %>%  select(Plot-ID %in% c("11a", "11b", "11c", "11d", "11e") )
-ruc_c2 <- ruc_c %>%  select(X, sp, X.89:X.109)
-hoch_c2 <- hoch_c %>% select (X, sp, X.29:X.39, X.76:X.85)
+
+ruc_c2 <- ruc_c %>%  select(Type, sp, X.88:X.108)
+hoch_c2 <- hoch_c %>% select (Type, sp, X.28:X.38, X.75:X.84)
 
 
-all_conny <- full_join(ruc_c2, hoch_c2, by = "sp") 
-all_conny <- all_conny %>% mutate_all(na_if,"") %>%  #replace empty cells with NA
+all_conny <- full_join(ruc_c2, hoch_c2, by = c("Type", "sp")) %>% 
+  mutate_all(na_if,"") %>%  #replace empty cells with NA
   drop_na(sp) %>% #remove empty columns
   filter(!(sp %in% c("Anzahl Arten", "Andere:", "Weitere:", "Anmerkung:", "Weitere", 
                      "Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig",
@@ -51,11 +54,19 @@ all_conny <- all_conny %>% mutate_all(na_if,"") %>%  #replace empty cells with N
 
 str(all_mine)
 
-all_data <- full_join(all_mine, all_conny, by = "sp") 
+all_data <- full_join(all_mine, all_conny, by = c("ï..Type"="Type", "sp")) 
 
+all_data2 <- all_data %>% distinct()
 
+all_data3 <- all_data %>%  rowid_to_column("Plot-ID")
+all_data4 <- all_data %>%  janitor::row_to_names("Plot-ID")
 
+#sorbus <- all_data %>% filter(sp == "Sorbus aucuparia")
 
-
-#longform gather()
+#longform gather() work in progress
 data_long <- gather(all_data, "Plot-ID", "sp")
+
+data_long <- pivot_longer()
+
+head(hoch1)
+str(hoch1)
