@@ -1,30 +1,30 @@
-﻿;sp;;;;;;;;;;
+﻿Type;sp;;;;;;;;;;
 ;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;
 ;;;;;;;;;;;
 ;Gebiet;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz
 ;Plot-ID;Ruc-NarU-1;Ruc-NarU-2;Ruc-NarU-3;Ruc-CaBi-1;Ruc-CaBi-2;Ruc-CaBi-3;Ruc-CaBi-4;Ruc-CaBi-5;Ruc-NarU-4;Ruc-NarU-5
-;DB_Jehl_Aufnahmefläche;;;;;;;;;;
+;DB_Jehl_Aufnahmeflaeche;;;;;;;;;;
 ;DB_Jehl_Aufnahme;;;;;;;;;;
 ;Datum:      ;21.07.2020;21.07.2020;21.07.2020;21.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020
 ;Bearbeiter:;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea ;Lea;Lea;Lea;Lea;Lea
-;Flächengröße;;;;;;;;;;
+;Area;;;;;;;;;;
 ;Management;brach;brach;brach;brach;brach;brach;brach;brach;brach;brach
 ;Vegetation inkl. Terrestr. Kryptosg. Gesamt  (%);95;85;80;75;99;99;97;97;97;98
-;Vegetation Obere  Höhe (cm);87;63;82;45;59;48;46;45;85;83
+;Vegetation Upper Height (cm);87;63;82;45;59;48;46;45;85;83
 ;Streu Deckung (%);20;25;40;100;100;100;100;100;90;90
-;Höhe der Streuschicht (cm);4;2;7;8;8;17;6;9;5;6
+;Height Streuschicht (cm);4;2;7;8;8;17;6;9;5;6
 ;Moose Deckung (%);50;70;35;;;;;;40;35
-;Moose Höhe (cm);5;2;2;;;;;;3,5;5
-;Gräser Deckung (%);60;30;50;73;97;92;85;96;60;65
-;Gräser Höhe (cm);87;63;82;45;52;41;38;35;85;83
-;Kräuter Deckung (%);35;30;20;2;2;7;12;0,5;37;33
-;Kräuter Höhe (cm);39;15;20;30;59;48;46;45;38;53
+;Moose Height (cm);5;2;2;;;;;;3,5;5
+;Grasses Deckung (%);60;30;50;73;97;92;85;96;60;65
+;Grasses Height (cm);87;63;82;45;52;41;38;35;85;83
+;Herbage Deckung (%);35;30;20;2;2;7;12;0,5;37;33
+;Herbage Height (cm);39;15;20;30;59;48;46;45;38;53
 ;Vegetation ohne moos;92;60;70;75;99;99;97;97;97;98
 ;Offen;;1;1;;;;;;;
 ;Wasser;;;;;;;;;;
 ;Baumschicht (%);;;;;;;;;;
-;Baumschicht (Höhe);;;;;;;;;;
+;Baumschicht (Height);;;;;;;;;;
 ;Slope;;;;;;;;;;
 ;Exposition;;;;;;;;;;
 ;;;;;;;;;;;
@@ -66,10 +66,10 @@ g;Poa pratensis s.str.;2;;;;;;;;;
 g;Poa trivialis;;;;;;;;;;
 g;Poa supina;;;;;;;;;;
 g;Trisetum flavescens;;;;;;;;;;
-b;Acer pseudaplatanus;;;;;;;;;;
+b;Acer pseudoplatanus;;;;;;;;;;
 b;Betula pendula juv.;;;;;;;;;;
 b;Fagus sylvatica juv.;;;;;;;;;;
-b;Picea abies B;;;;;;;;;;
+b;Picea abies;;;;;;;;;;
 b;Picea abies juv.;;;;;;;;;;
 b;Sorbus aucuparia;;;;;;;;;;
 k;Achillea millefolium;;;;;;;;;;
@@ -166,6 +166,6 @@ m;Rhytidiadelphus squarrosus;;;;;;;;;;
 ;Anmerkung:;waldähnlich;;;;;;;;;
 ;;;;;;;;;;;
 ;Weitere;;;;;;;;;;
-;Sorbus aucuparia;;;;;;;;;;0,3
-;Acer pseudoplatanus;0,1;;;;;;;;;
-;Picea abies;;0,1;;;;;;;;
+b;Sorbus aucuparia;;;;;;;;;;0,3
+b;Acer pseudoplatanus;0,1;;;;;;;;;
+b;Picea abies;;0,1;;;;;;;;

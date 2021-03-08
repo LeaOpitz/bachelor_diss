@@ -1,30 +1,30 @@
-﻿;sp;;;;;;;;;;;;;;;;;;
+﻿Type;sp;;;;;;;;;;;;;;;;;;
 ;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;;;;;;;;;
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;
 ;Gebiet;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten
 ;Plot-ID;Hoc-Agr-5;Hoc-Agr-4 ;Hoc-Agr-3;Hoc-CaBi-1;Hoc-CaBi-2;Hoc-CaBi-3;Hoc-CaBi-4;Hoc-CaBi-5;Hoc-NarU-1;Hoc-NarU-2;Hoc-NarU-3;Hoc-NarU-4;Hoc-NarU-5;Hoc-CaBiU-1;Hoc-CaBiU-2;Hoc-CaBiU-3;Hoc-CaBiU-4;Hoc-CaBiU-5
-;DB_Jehl_Aufnahmefläche;;;;;;;;;;;;;;;;;;
+;DB_Jehl_Aufnahmeflaeche;;;;;;;;;;;;;;;;;;
 ;DB_Jehl_Aufnahme;;;;;;;;;;;;;;;;;;
 ;Datum:      ;29.07.2020;29.07.2020;29.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020
 ;Bearbeiter:;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea;Lea
-;Flächengröße;;;;;;;;;;;;;;;;;;
+;Area;;;;;;;;;;;;;;;;;;
 ;Management;brach;brach;brach;beweidet;beweidet;beweidet;beweidet;beweidet;brach;brach;brach;brach;brach;brach;brach;brach;brach;brach
 ;Vegetation inkl. Terrestr. Kryptosg. Gesamt  (%);98;92;90;98;95;97;98;95;80;75;80;85;77;90;95;85;92;92
-;Vegetation Obere  Höhe (cm);68;75;66;41;49;59;74;51;70;56;61;61;55;57;40;61;51;44
+;Vegetation Upper Height (cm);68;75;66;41;49;59;74;51;70;56;61;61;55;57;40;61;51;44
 ;Streu Deckung (%);80;75;80;100;100;100;100;100;80;80;90;65;90;100;100;100;100;100
-;Höhe der Streuschicht (cm);6;2;3;5;4;4;4;7;9;6;8;7;7;13;16;8;9;10
+;Height Streuschicht (cm);6;2;3;5;4;4;4;7;9;6;8;7;7;13;16;8;9;10
 ;Moose Deckung (%);10;30;5;;;1;1;;5;5;5;20;5;;;;;
-;Moose Höhe (cm);3;15;2;;;2;0,5;;1;1;1;8;1,5;;;;;
-;Gräser Deckung (%);48;50;40;98;95;95;97;93;75;70;72;65;75;89;90;80;92;85
-;Gräser Höhe (cm);68;75;66;41;49;59;74;51;70;56;61;61;55;57;40;61;51;44
-;Kräuter Deckung (%);50;42;50;;;2;0,5;2;5;5;8;10;2;1;5;5;;7
-;Kräuter Höhe (cm);32;41;29;;;25;26;22;20;12;19;16;17;17;37;29;;28
+;Moose Height (cm);3;15;2;;;2;0,5;;1;1;1;8;1,5;;;;;
+;Grasses Deckung (%);48;50;40;98;95;95;97;93;75;70;72;65;75;89;90;80;92;85
+;Grasses Height (cm);68;75;66;41;49;59;74;51;70;56;61;61;55;57;40;61;51;44
+;Herbage Deckung (%);50;42;50;;;2;0,5;2;5;5;8;10;2;1;5;5;;7
+;Herbage Height (cm);32;41;29;;;25;26;22;20;12;19;16;17;17;37;29;;28
 ;Vegetation ohne moos;98;92;90;98;95;97;98;95;80;75;80;75;77;90;95;85;92;92
 ;Offen;;;;;;;;;;;;;;;;;;
 ;Wasser;;;;;;;;;;;;;;;;;;
 ;Baumschicht (%);;;;;;;;;;;;;;;;;;
-;Baumschicht (Höhe);;;;;;;;;;;;;;;;;;
+;Baumschicht (Height);;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;
 g;Agrostis capillaris;33;17;17;;;;12;5;;;0,3;0,3;;;;5;;0,1
 g;Agrostis canina;;;;;;;;;;;;;;;;;;
@@ -67,7 +67,7 @@ g;Trisetum flavescens;;;;;;;;;;;;;;;;;;
 b;Acer pseudaplatanus;;;;;;;;;;;;;;;;;;
 b;Betula pendula juv.;;;;;;;;;;;;;;;;;;
 b;Fagus sylvatica juv.;;;;;;;;;;;;;;;;;;
-b;Picea abies B;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;
 b;Picea abies juv.;;;;;;;;;;;;;;;;;;
 b;Sorbus aucuparia;;;;;;;;;;;;;;;;;;
 k;Achillea millefolium;;;;;;;;;;;;;;;;;;
@@ -165,6 +165,6 @@ m;Rhytidiadelphus squarrosus;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;
 ;Weitere:;;;;;;;;;;;;;;;;;;
-;Maianthemum bifolium;0,1;0,1;0,5;;;;;;;;;;;;;;;
-;Ranunculus platanifolius/ aconitifolius;1;;0,5;;;;;;;;;;;;;;;
-;Picea abies;;;;;;;;;;;0,1;;;;;;;
+k;Maianthemum bifolium;0,1;0,1;0,5;;;;;;;;;;;;;;;
+k;Ranunculus platanifolius/ aconitifolius;1;;0,5;;;;;;;;;;;;;;;
+b;Picea abies;;;;;;;;;;;0,1;;;;;;;
