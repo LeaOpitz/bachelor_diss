@@ -1,9 +1,9 @@
 ﻿Type;sp;;;;;;;;;;
 ;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;
-;;;;;;;;;;;
-;Gebiet;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz
-;Plot-ID;Ruc-Berg-1;Ruc-Berg-2;Ruc-Nar-1;Ruc-Nar-2;Ruc-Nar-3;Ruc-Nar-4;Ruc-Nar-5;Ruc-Berg-3;Ruc-Berg-4;Ruc-Berg-5
+;Vegetationstyp;Mountain Meadow;Mountain Meadow;Nardetum;Nardetum;Nardetum;Nardetum;Nardetum;Mountain Meadow;Mountain Meadow;Mountain Meadow
+;Gebiet;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten
+Type;Plot-ID;Ruc-Berg-1;Ruc-Berg-2;Ruc-Nar-1;Ruc-Nar-2;Ruc-Nar-3;Ruc-Nar-4;Ruc-Nar-5;Ruc-Berg-3;Ruc-Berg-4;Ruc-Berg-5
 ;DB_Jehl_Aufnahmeflaeche;;;;;;;;;;
 ;DB_Jehl_Aufnahme;;;;;;;;;;
 ;Datum:      ;21.07.2020;21.07.2020;21.07.2020;21.07.2020;21.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020
@@ -24,7 +24,7 @@
 ;Offen;;2;1;1;1;;1;;;1
 ;Wasser;;;;;;;;;;
 ;Baumschicht (%);;;;;;;;;;
-;Baumschicht (Height);;;;;;;;;;
+;Baumschicht (cm);;;;;;;;;;
 ;Slope;;;;;;;;;;
 ;Exposition;;;;;;;;;;
 ;;;;;;;;;;;

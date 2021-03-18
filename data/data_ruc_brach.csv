@@ -1,9 +1,9 @@
 ﻿Type;sp;;;;;;;;;;
 ;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;
-;;;;;;;;;;;
-;Gebiet;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz;Ruckowitz
-;Plot-ID;Ruc-NarU-1;Ruc-NarU-2;Ruc-NarU-3;Ruc-CaBi-1;Ruc-CaBi-2;Ruc-CaBi-3;Ruc-CaBi-4;Ruc-CaBi-5;Ruc-NarU-4;Ruc-NarU-5
+;Vegetationstyp;Nardetum;Nardetum;Nardetum;Carex brizoides;Carex brizoides;Carex brizoides;Carex brizoides;Carex brizoides;Nardetum;Nardetum
+;Gebiet;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten;Ruckowitzschachten
+Type;Plot-ID;Ruc-NarU-1;Ruc-NarU-2;Ruc-NarU-3;Ruc-CaBi-1;Ruc-CaBi-2;Ruc-CaBi-3;Ruc-CaBi-4;Ruc-CaBi-5;Ruc-NarU-4;Ruc-NarU-5
 ;DB_Jehl_Aufnahmeflaeche;;;;;;;;;;
 ;DB_Jehl_Aufnahme;;;;;;;;;;
 ;Datum:      ;21.07.2020;21.07.2020;21.07.2020;21.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020;23.07.2020
@@ -24,7 +24,7 @@
 ;Offen;;1;1;;;;;;;
 ;Wasser;;;;;;;;;;
 ;Baumschicht (%);;;;;;;;;;
-;Baumschicht (Height);;;;;;;;;;
+;Baumschicht (cm);;;;;;;;;;
 ;Slope;;;;;;;;;;
 ;Exposition;;;;;;;;;;
 ;;;;;;;;;;;

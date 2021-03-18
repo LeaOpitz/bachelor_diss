@@ -3,9 +3,9 @@
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;
 ;Gebiet;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus
-;Plot-ID;Sch-Agr-1;Sch-Agr-2;Sch-Cal-1;Sch-Nar-1;Sch-Cal-2;Sch-Cal-3;Sch-Cal-5;Sch-Cal-4;Sch-Nar-2;Sch-Nar-3;Sch-Nar-4;Sch-Nar-5;Sch-Agr-3;Sch-Agr-4;Sch-Agr-5
+Type;Plot-ID;Sch-Agr-1;Sch-Agr-2;Sch-Cal-1;Sch-Nar-1;Sch-Cal-2;Sch-Cal-3;Sch-Cal-5;Sch-Cal-4;Sch-Nar-2;Sch-Nar-3;Sch-Nar-4;Sch-Nar-5;Sch-Agr-3;Sch-Agr-4;Sch-Agr-5
 ;DB_Jehl_Aufnahmeflaeche;;;;;;;;;;;;;;;
-;DB_Jehl_Aufnahme;;;;;;;;;;;;;;;
+;Vegetationstyp;Mountain Meadow;Mountain Meadow;Calthion;Nardetum;Calthion;Calthion;Calthion;Calthion;Nardetum;Nardetum;Nardetum;Nardetum;Mountain Meadow;Mountain Meadow;Mountain Meadow
 ;Datum:      ;09.07.2020;09.07.2020;09.07.2020;09.07.2020;14.07.2020;14.07.2020;14.07.2020;14.07.2020;14.07.2020;14.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020
 ;Bearbeiter:;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea & Conny;Lea;Lea;Lea;Lea;Lea
 ;Area;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2;4 m2
@@ -24,7 +24,7 @@
 ;Offen;3;1;0;7;;;0,5;;2;3;3;4;2;4;
 ;Vegetation ohne moos;90;97;90;80;96;95;95;70;70;60;70;78;95;83;98
 ;Baumschicht (%);;;;;;;;;;;;;;;
-;Baumschicht (Height);;;;;;;;;;;;;;;
+;Baumschicht (cm);;;;;;;;;;;;;;;
 ;Slope;;;;;2;2;;;;;;;;;
 ;Exposition;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO
 ;;;;;;;;;;;;;;;;

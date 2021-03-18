@@ -1,9 +1,9 @@
 ﻿Type;sp;;;;;;;;;;;;;;;
 ;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;;;;;;
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;
+;Vegetationstyp;Mountain Meadow;Carex brizoides;Carex brizoides;Carex brizoides;Carex brizoides;Carex brizoides;Mountain Meadow;Mountain Meadow;Mountain Meadow;Mountain Meadow;Nardetum;Nardetum;Nardetum;Nardetum;Nardetum
 ;Gebiet;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus;Schachtenhaus
-;Plot-ID;Sch-BergU-4;Sch-CaBi-1;Sch-CaBi-2;Sch-CaBi-3;Sch-CaBi-4;Sch-CaBi-5;Sch-BergU-1;Sch-BergU-2;Sch-BergU-3;Sch-BergU-5;Sch-NarU-1;Sch-NarU-2;Sch-NarU-3;Sch-NarU-4;Sch-NarU-5
+Type;Plot-ID;Sch-BergU-4;Sch-CaBi-1;Sch-CaBi-2;Sch-CaBi-3;Sch-CaBi-4;Sch-CaBi-5;Sch-BergU-1;Sch-BergU-2;Sch-BergU-3;Sch-BergU-5;Sch-NarU-1;Sch-NarU-2;Sch-NarU-3;Sch-NarU-4;Sch-NarU-5
 ;DB_Jehl_Aufnahmeflaeche;;;;;;;;;;;;;;;
 ;DB_Jehl_Aufnahme;;;;;;;;;;;;;;;
 ;Datum:      ;14.07.2020;14.07.2020;14.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020;22.07.2020
@@ -24,7 +24,7 @@
 ;Offen;;;;;;;0,5;;;;2;;;;1
 ;Vegetation ohne moos;90;70;80;;98;95;97;98;97;98;70;70;80;85;80
 ;Baumschicht (%);;;;;;;;;;;;;;;
-;Baumschicht (Height);;;;;;;;;;;;;;;
+;Baumschicht (cm);;;;;;;;;;;;;;;
 ;Slope;;;;;;;;;;;;;;;
 ;Exposition;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO;SO
 ;;;;;;;;;;;;;;;;

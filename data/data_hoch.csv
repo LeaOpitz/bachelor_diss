@@ -1,9 +1,9 @@
 ﻿Type;sp;;;;;;;;;;;;;;;;;;
 ;[] = diese Art ist außerhalb des Plotes gewachsen;;;;;;;;;;;;;;;;;;
 ;Skala: Londo, alle Werte bereits in Deckungen, keine Transformation nötig;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;
+;Vegetationstyp;Mountain Meadow;Mountain Meadow;Mountain Meadow;Mountain Meadow;Carex brizoides;Carex brizoides;Carex brizoides;Carex brizoides;Nardetum;Nardetum;Nardetum;Nardetum;Nardetum;Carex brizoides;Carex brizoides;Carex brizoides;Carex brizoides;Carex brizoides
 ;Gebiet;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten;Hochschachten
-;Plot-ID;Hoc-Agr-5;Hoc-Agr-4 ;Hoc-Agr-3;Hoc-CaBi-1;Hoc-CaBi-2;Hoc-CaBi-3;Hoc-CaBi-4;Hoc-CaBi-5;Hoc-NarU-1;Hoc-NarU-2;Hoc-NarU-3;Hoc-NarU-4;Hoc-NarU-5;Hoc-CaBiU-1;Hoc-CaBiU-2;Hoc-CaBiU-3;Hoc-CaBiU-4;Hoc-CaBiU-5
+Type;Plot-ID;Hoc-Agr-5;Hoc-Agr-4 ;Hoc-Agr-3;Hoc-CaBi-1;Hoc-CaBi-2;Hoc-CaBi-3;Hoc-CaBi-4;Hoc-CaBi-5;Hoc-NarU-1;Hoc-NarU-2;Hoc-NarU-3;Hoc-NarU-4;Hoc-NarU-5;Hoc-CaBiU-1;Hoc-CaBiU-2;Hoc-CaBiU-3;Hoc-CaBiU-4;Hoc-CaBiU-5
 ;DB_Jehl_Aufnahmeflaeche;;;;;;;;;;;;;;;;;;
 ;DB_Jehl_Aufnahme;;;;;;;;;;;;;;;;;;
 ;Datum:      ;29.07.2020;29.07.2020;29.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020;30.07.2020
@@ -24,7 +24,7 @@
 ;Offen;;;;;;;;;;;;;;;;;;
 ;Wasser;;;;;;;;;;;;;;;;;;
 ;Baumschicht (%);;;;;;;;;;;;;;;;;;
-;Baumschicht (Height);;;;;;;;;;;;;;;;;;
+;Baumschicht (cm);;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;
 g;Agrostis capillaris;33;17;17;;;;12;5;;;0,3;0,3;;;;5;;0,1
 g;Agrostis canina;;;;;;;;;;;;;;;;;;
