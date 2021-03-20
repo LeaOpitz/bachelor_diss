@@ -145,6 +145,24 @@ species3 <- species2 %>% rownames_to_column(var = "plot") %>%
 abundance <- data_long %>% count(plot, name = "species")%>% 
   full_join(meta_long, by = c("plot"))  
 
+  ##### Mean of the column by group 
+mean1 <-  aggregate(x= abundance$species,
+            by= list(abundance$Management),
+            FUN=mean)
+
+standard_error <- function(x) sd(x) / sqrt(length(x)) # Create own function
+
+mean2 <- abundance %>%
+  group_by(Management) %>%
+  mutate(mean_by_group = mean(species)) %>% 
+  mutate(standard_error(species))
+
+mean3 <- abundance %>%
+  group_by(Vegetation_type) %>%
+  mutate(mean_by_group = mean(species)) %>% 
+  mutate(standard_error(species))
+
+
 
 
 plantlm1 <- lm(species~Management*Vegetation_type, data = abundance)
@@ -155,14 +173,17 @@ plantlm2 <- lm(species~Management*Area, data = abundance)
 summary(plantlm2)
 anova(plantlm2)
 
-ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
+(box_man <- ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
   geom_boxplot(size = 0.3) +
   theme_classic()+ 
   #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
    # values = c("#FEB96C", "#CC92C2"))+
   scale_x_discrete(name = "\ntypes of managemnt") +
   scale_y_continuous(name = "# species\n")+
-  theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5))
+  theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
+
+res <-  boxplot(species~Management, data = abundance) #medians   8.5   16   13
+res
 
 
 ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = species, fill = Vegetation_type))+
@@ -265,7 +286,7 @@ orditorp(NMDS3, display = "sites", cex = 1.1, air = 0.01)
 # Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
 #group = c(rep("Blackford", 28), rep("Craigmillar", 28))
 #meta_long %>% count(Vegetation_type)
-meta_long %>% count(Management)
+#meta_long %>% count(Management)
 #meta_long %>% count(Area)
 
 group = c(rep("Caltion", 18), rep("Carex", 21),
