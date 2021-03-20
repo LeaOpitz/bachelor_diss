@@ -155,7 +155,24 @@ plantlm2 <- lm(species~Management*Area, data = abundance)
 summary(plantlm2)
 anova(plantlm2)
 
+ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
+  geom_boxplot(size = 0.3) +
+  theme_classic()+ 
+  #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
+   # values = c("#FEB96C", "#CC92C2"))+
+  scale_x_discrete(name = "\ntypes of managemnt") +
+  scale_y_continuous(name = "# species\n")+
+  theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5))
 
+
+ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = species, fill = Vegetation_type))+
+  geom_boxplot(size = 0.3) +
+  theme_classic()+ 
+  #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
+  # values = c("#FEB96C", "#CC92C2"))+
+  scale_x_discrete(name = "\nvegetation types") +
+  scale_y_continuous(name = "# species\n")+
+  theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5))
 #Pielou’s evennessJ=H′/log(S) is easily found as: 
     #J <- H/log(specnumber(BCI))
 
@@ -248,8 +265,8 @@ orditorp(NMDS3, display = "sites", cex = 1.1, air = 0.01)
 # Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
 #group = c(rep("Blackford", 28), rep("Craigmillar", 28))
 #meta_long %>% count(Vegetation_type)
-#meta_long %>% count(Management)
-meta_long %>% count(Area)
+meta_long %>% count(Management)
+#meta_long %>% count(Area)
 
 group = c(rep("Caltion", 18), rep("Carex", 21),
           rep("Mountain Meadow", 29), rep("Nardetum", 30))
@@ -266,7 +283,7 @@ for(i in unique(group)) {
            groups = group[group == i],col = colors[grep(i,group)],label=F) } 
 
 orditorp(NMDS3, display = "species", col = "red", air = 0.01)
-orditorp(NMDS3, display = "sites", col = c(rep("yellow", 18), rep("orange", 16),
+orditorp(NMDS3, display = "sites", col = c(rep("yellow", 18), rep("orange", 21),
                                            rep("red", 29), rep("purple", 30)), air = 0.01, cex = 1.25)
 
 
@@ -274,11 +291,11 @@ orditorp(NMDS3, display = "sites", col = c(rep("yellow", 18), rep("orange", 16),
 NMDS4 <- metaMDS(species4, k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
 
 
-group = c(rep("brach", 43), rep("mahd", 26), rep("weide", 29))
-colours = c(rep("brown", 43), rep("light green", 26), rep("dark green", 29))
+group = c(rep("brach", 48), rep("mahd", 21), rep("weide", 29))
+colours = c(rep("brown", 48), rep("light green", 21), rep("dark green", 29))
 
 ordiplot(NMDS4, type = "n")
-orditorp(NMDS4, display = "sites", col = c(rep("brown", 43), rep("light green", 26), 
+orditorp(NMDS4, display = "sites", col = c(rep("brown", 48), rep("light green", 21), 
                                      rep("dark green", 29)), air = 0.01, cex = 1.25)
 
 # group by site
