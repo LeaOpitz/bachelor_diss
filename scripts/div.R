@@ -1,6 +1,8 @@
 #Undergrad Dissertation
 #Lea Opitz
 #University of Edinburgh
+#2020 data
+
 
 ## Diversity -----
 
@@ -142,10 +144,24 @@ species3 <- species2 %>% rownames_to_column(var = "plot") %>%
 
 ## data analysis ----
 
+  #get #rare species  
+rare_sp <- data_long %>% group_by(plot) %>% 
+    count(red_list, name = "rare") %>% 
+    subset(red_list!="N")
+  
+  
 abundance <- data_long %>% count(plot, name = "species")%>% 
-  full_join(meta_long, by = c("plot"))  
+  full_join(rare_sp, by = c("plot"))  %>% 
+  full_join(meta_long, by = c("plot")) %>% 
+    mutate(prop_rare = rare/ species) %>% 
+    select(-c(red_list))
 
-  ##### Mean of the column by group 
+abundance[is.na(abundance)] <- 0 
+ 
+
+   
+  
+##### Mean of the species column by group 
 mean1 <-  aggregate(x= abundance$species,
             by= list(abundance$Management),
             FUN=mean)
@@ -186,7 +202,7 @@ res <-  boxplot(species~Management, data = abundance) #medians   8.5   16   13
 res
 
 
-ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = species, fill = Vegetation_type))+
+box_veg <- ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = species, fill = Vegetation_type))+
   geom_boxplot(size = 0.3) +
   theme_classic()+ 
   #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
@@ -194,8 +210,18 @@ ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = species, fill = V
   scale_x_discrete(name = "\nvegetation types") +
   scale_y_continuous(name = "# species\n")+
   theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5))
-#Pielou’s evennessJ=H′/log(S) is easily found as: 
-    #J <- H/log(specnumber(BCI))
+
+
+## Evenness
+# Shannon index
+H <- diversity(abundance$species) #4.4077
+#Pielou’s evenness J=H′/log(S)
+J <- H/log(specnumber(abundance$species)) #0.9613
+
+#by subgroup?
+H <- abundance %>% group_by(Management) %>%
+      diversity(abundance$species)
+
 
 #betadiv:
     #betadiver(x, method = NA, order = FALSE, help = FALSE, ...)
@@ -205,57 +231,6 @@ betadiv <- data_long %>% betadiver(method = "bray")
 
 designdist
 
-#### isla's betadiv code ----
-
-
-# loop to calculate biodiversity metrics ----
-beta_Bray <- data.frame(matrix(ncol = 7, nrow = length(unique(data$SiteSubsite)))) 
-names(beta_Bray) <- c("SiteSubsite", "duration", "richness", "richness_change", "Bbal", "Bgra", "Bbray") 
-
-# beta_Jaccard <- data.frame(matrix(ncol = 7, nrow = length(unique(data$SiteSubsite)))) 
-# names(beta_Jaccard) <- c("SiteSubsite", "duration", "richness", "richness_change", "Jbeta", "Jtu", "Jne")
-
-i = 1
-
-# for loop with betapart ----
-for (i in 1:length(unique(data$SiteSubsite))) {
-  SiteSubSiteName <- as.character(unique(data$SiteSubsite)[i])
-  sub_bio_abundance <- filter(data, SiteSubsite == SiteSubSiteName)
-  YearMin <- min(sub_bio_abundance$YEAR)
-  YearMax <- max(sub_bio_abundance$YEAR)
-  duration <- YearMax - YearMin
-  # filters the dataframe for just the first and last observations per plot
-  sub_bio_abundance_min <- filter(sub_bio_abundance, YEAR == YearMin)
-  sub_bio_abundance_max <- filter(sub_bio_abundance, YEAR == YearMax)
-  sub_bio_abundance <- rbind(sub_bio_abundance_min, sub_bio_abundance_max)
-  richness <- length(unique(sub_bio_abundance$GENUS_SPECIES))
-  # averages any species that have multiple records per plot and time point 
-  sub_bio_abundance <- sub_bio_abundance %>% group_by(SiteSubsite, GENUS_SPECIES, YEAR) %>% summarise(Abundance = mean(Abundance)) %>% ungroup()
-  # reshape to wide form
-  sub_bio_abundance_wider <- pivot_wider(sub_bio_abundance, names_from = GENUS_SPECIES, 
-                                         values_from = Abundance, 
-                                         values_fill = list(Abundance = 0))
-  # removes columns for beta.pair() function
-  sub_bio_abundance_matrix <- dplyr::select(sub_bio_abundance_wider, -SiteSubsite, -YEAR) 
-  # creates presence-absence matrix
-  sub_bio_presence_matrix <- with(sub_bio_abundance_matrix, ifelse(sub_bio_abundance_matrix > 0,1,0))
-  # calculates Jaccard overall, turnover and nestedness
-  # J_components <- beta.pair(sub_bio_presence_matrix, index.family='jaccard')
-  J_components <- beta.pair.abund(sub_bio_presence_matrix, index.family='bray')
-  # saves biodiversity metrics
-  richness_change <- rowSums(sub_bio_presence_matrix)[2] - rowSums(sub_bio_presence_matrix)[1]
-  # Jbeta <- J_components$beta.jac
-  # Jtu <- J_components$beta.jtu
-  # Jne <- J_components$beta.jne
-  Bbal <- J_components$beta.bray.bal
-  Bgra <- J_components$beta.bray.gra
-  Bbray <- J_components$beta.bray
-  # beta_Jaccard[i,] <- c(SiteSubSiteName, duration, richness, richness_change, Jbeta, Jtu, Jne)
-  beta_Bray[i,] <- c(SiteSubSiteName, duration, richness, richness_change, Bbal, Bgra, Bbray)
-  i = i+1
-}
-
-beta_Bray
 
 #NMDS
 #needs sp as column names
@@ -301,7 +276,7 @@ ordiplot(NMDS3, type = "n")
 
 for(i in unique(group)) {
   ordihull(NMDS3$point[grep(i, group),], draw="polygon",
-           groups = group[group == i],col = colors[grep(i,group)],label=F) } 
+           groups = group[group == i],col = colours[grep(i,group)],label=F) } 
 
 orditorp(NMDS3, display = "species", col = "red", air = 0.01)
 orditorp(NMDS3, display = "sites", col = c(rep("yellow", 18), rep("orange", 21),
@@ -332,7 +307,7 @@ orditorp(NMDS5, display = "sites", col = c(rep("dark blue", 30), rep("light blue
 #code cc tut ----
 
 # Here we use bray-curtis distance, which is recommended for abundance data
-dist <- vegdist(species2,  method = "bray")
+dist <- vegdist(species4,  method = "bray")
 
 # In this part, we define a function NMDS.scree() that automatically 
 # performs a NMDS for 1-10 dimensions and plots the nr of dimensions vs the stress
@@ -362,13 +337,80 @@ stressplot(NMDS1)
 plot(NMDS1, type = "t")
 
 #giving metaMDS the original community matrix as input and specifying the distance measure
-NMDS2 <- metaMDS(species2, k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
+NMDS2 <- metaMDS(species4, k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
 plot(NMDS2)
 plot(NMDS2, display = "sites", type = "n")
 points(NMDS2, display = "sites", col = "red", cex = 1.25)
-text(NMDS2, display ="species")
+text(NMDS2, display ="sites")
 
 # Alternatively, you can use the functions ordiplot and orditorp
 ordiplot(NMDS2, type = "n")
 orditorp(NMDS2, display = "species", col = "red", air = 0.01)
 orditorp(NMDS2, display = "sites", cex = 1.1, air = 0.01)
+
+# Load the second dataset (envir variables)
+
+
+# The function envfit will add the environmental variables as vectors to the ordination plot
+ef <- envfit(NMDS2, meta_long2, permu = 999)
+ef
+
+# The two last columns are of interest: the squared correlation coefficient and the associated p-value
+# Plot the vectors of the significant correlations and interpret the plot
+plot(NMDS2, type = "t", display = "sites")
+plot(ef, p.max = 0.05)
+
+
+# Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
+group = c(rep("brach", 48), rep("mahd", 21), rep("weide", 29))
+
+# Create a vector of color values with same length as the vector of group values
+colors = c(rep("brown", 48), rep("light green", 21), rep("dark green", 29))
+
+# Plot convex hulls with colors based on the group identity
+ordiplot(NMDS2, type = "n")
+for(i in unique(group)) {
+  ordihull(NMDS2$point[grep(i, group),], draw="polygon",
+           groups = group[group == i],col = colors[grep(i,group)],label=F) } 
+
+#orditorp(NMDS2, display = "species", col = "red", air = 0.01)
+orditorp(NMDS2, display = "sites", col = c(rep("brown", 48), 
+                     rep("light green", 21), rep("dark green", 29)), air = 0.01, cex = 1.25)
+
+
+###adonis
+all.sites<-rbind(sites.a,sites.b,sites.c)
+
+trt<-rep(c("C","H","L"),each=nrow(sites.a))
+
+adon.results<-adonis(species4 ~ group, method="bray",perm=999)
+print(adon.results)
+
+## Bray-Curtis distances between samples
+dis <- vegdist(species4)
+
+## Calculate multivariate dispersions
+mod <- betadisper(dis, group)
+mod
+
+##difr website
+otu <- abundances(pseq.rel)
+meta <- meta(pseq.rel)
+
+permanova <- adonis(t(abundance$species) ~ group,
+                    data = meta_long2, permutations=99, method = "bray")
+
+# P-value
+#print(as.data.frame(permanova$aov.tab)["group", "Pr(>F)"])
+print(as.data.frame(adon.results$aov.tab)["group", "Pr(>F)"])
+
+
+#checking homogeneity cond
+dist <- vegdist(t(otu))
+
+#investigate top factors
+coef <- coefficients(permanova)["group1",]
+top.coef <- coef[rev(order(abs(coef)))[1:20]]
+par(mar = c(3, 14, 2, 1))
+barplot(sort(top.coef), horiz = T, las = 1, main = "Top taxa")
+anova(betadisper(dist, meta$group))
