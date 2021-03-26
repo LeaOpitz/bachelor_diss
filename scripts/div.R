@@ -86,7 +86,7 @@ just_sp <- sp_list2 %>% slice(-c(1:3))
 sp_long <- just_sp %>%
   pivot_longer(-c("Type","red_list", "Plot-ID"), names_to = "plot", values_to = "cover") %>% 
   drop_na(cover) %>% 
-  rename("sp"="Plot-ID") %>% 
+  rename(c("sp" = "Plot-ID")) %>% 
   group_by(plot)
 
 
@@ -94,7 +94,7 @@ meta_long <- data.frame(t(metadata[-1]))
 colnames(meta_long) <- metadata[, 1]
 meta_long <- meta_long %>% rownames_to_column(var = "plot")
 
-
+meta_long2 <- meta_long %>% column_to_rownames(var = "plot")
 
 #join longform
 data_long <- full_join(sp_long, meta_long, by = c("plot"))
@@ -105,7 +105,7 @@ species <- just_sp %>% select(-c("Type", "red_list")) #delete unnecessary column
 species <- data.frame(t(species)) #switch rows and columns
 
 species2 <- species %>% janitor::row_to_names(1) #sp as column names 
-species2<- species2[ , colSums(is.na(species2)) < nrow(species2)] #delete all NA rows
+#species2<- species2[ , colSums(is.na(species2)) < nrow(species2)] #delete all NA rows
 species2[is.na(species2)] <- 0 #NA <- 0
 species2[] <- lapply(species2, as.numeric)
 
@@ -114,7 +114,9 @@ species2[] <- lapply(species2, as.numeric)
 species3 <- species2 %>% rownames_to_column(var = "plot") %>% 
   left_join(meta_long, by = c("plot")) %>% 
   arrange(Vegetation_type) %>% 
-  select(-c(155:158)) %>% 
+  #select(-c(155:158)) %>% 
+  select(-c(155:157)) %>% #delete meta data again
+  #select(-c("Sphagnum sec.", "Climatium dendroides", "Plagiomnium undulatum")) %>%
   column_to_rownames(var = "plot")
   
   species3[is.na(species3)] <- 0 #NA <- 0
@@ -125,21 +127,21 @@ species3 <- species2 %>% rownames_to_column(var = "plot") %>%
   species4 <- species2 %>% rownames_to_column(var = "plot") %>% 
     left_join(meta_long, by = c("plot")) %>% 
     arrange(Management) %>% 
-    select(-c(155:158)) %>% 
+    select(-c(155:157)) %>% 
     column_to_rownames(var = "plot")
   
-  species4[is.na(species3)] <- 0 #NA <- 0
-  species4[] <- lapply(species3, as.numeric)
+  species4[is.na(species4)] <- 0 #NA <- 0
+  species4[] <- lapply(species4, as.numeric)
   
 #sort by site
   species5 <- species2 %>% rownames_to_column(var = "plot") %>% 
     left_join(meta_long, by = c("plot")) %>% 
     arrange(Area) %>% 
-    select(-c(155:158)) %>% 
+    select(-c(155:157)) %>% 
     column_to_rownames(var = "plot")
   
-  species5[is.na(species3)] <- 0 #NA <- 0
-  species5[] <- lapply(species3, as.numeric)
+  species5[is.na(species5)] <- 0 #NA <- 0
+  species5[] <- lapply(species5, as.numeric)
   
 
 ## data analysis ----
@@ -157,10 +159,10 @@ abundance <- data_long %>% count(plot, name = "species")%>%
     select(-c(red_list))
 
 abundance[is.na(abundance)] <- 0 
- 
 
-   
-  
+abundance2 <- abundance %>% select(-c(rare, prop_rare))   
+ 
+str(abundance) 
 ##### Mean of the species column by group 
 mean1 <-  aggregate(x= abundance$species,
             by= list(abundance$Management),
@@ -173,21 +175,15 @@ mean2 <- abundance %>%
   mutate(mean_by_group = mean(species)) %>% 
   mutate(standard_error(species))
 
-mean3 <- abundance %>%
+mean3 <- abundance2 %>%
   group_by(Vegetation_type) %>%
   mutate(mean_by_group = mean(species)) %>% 
   mutate(standard_error(species))
 
-
-
-
-plantlm1 <- lm(species~Management*Vegetation_type, data = abundance)
-summary(plantlm1)
-anova(plantlm1)
-
-plantlm2 <- lm(species~Management*Area, data = abundance)
-summary(plantlm2)
-anova(plantlm2)
+mean4 <- abundance2 %>%
+  group_by(Area) %>%
+  mutate(mean_by_group = mean(species)) %>% 
+  mutate(standard_error(species))
 
 (box_man <- ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
   geom_boxplot(size = 0.3) +
@@ -202,7 +198,7 @@ res <-  boxplot(species~Management, data = abundance) #medians   8.5   16   13
 res
 
 
-box_veg <- ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = species, fill = Vegetation_type))+
+(box_veg <- ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = species, fill = Vegetation_type))+
   geom_boxplot(size = 0.3) +
   theme_classic()+ 
   #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
@@ -210,7 +206,19 @@ box_veg <- ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = specie
   scale_x_discrete(name = "\nvegetation types") +
   scale_y_continuous(name = "# species\n")+
   theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5))
+)
 
+(box_area <- ggplot(data= abundance, aes(x= as.factor(Area), y = species, fill = Area))+
+  geom_boxplot(size = 0.3) +
+  theme_classic()+ 
+  #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
+  # values = c("#FEB96C", "#CC92C2"))+
+  scale_x_discrete(name = "\nvegetation types") +
+  scale_y_continuous(name = "# species\n")+
+  theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
+
+res2 <-  boxplot(species~Area, data = abundance)
+res2
 
 ## Evenness
 # Shannon index
@@ -218,11 +226,11 @@ H <- diversity(abundance$species) #4.4077
 #Pielou’s evenness J=H′/log(S)
 J <- H/log(specnumber(abundance$species)) #0.9613
 
-#by subgroup?
+#by subgroup? 
 H <- abundance %>% group_by(Management) %>%
       diversity(abundance$species)
 
-
+abundance$species <- as.numeric(as.character(abundance$species)) 
 #betadiv:
     #betadiver(x, method = NA, order = FALSE, help = FALSE, ...)
     #method: Bray-Curtis ((A+B-2*J)/(A+B)	"minimum"	Bray-Curtis)
@@ -232,7 +240,7 @@ betadiv <- data_long %>% betadiver(method = "bray")
 designdist
 
 
-#NMDS
+#### ordination ----
 #needs sp as column names
 
 
@@ -260,11 +268,11 @@ orditorp(NMDS3, display = "sites", cex = 1.1, air = 0.01)
 ## sites
 # Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
 #group = c(rep("Blackford", 28), rep("Craigmillar", 28))
-#meta_long %>% count(Vegetation_type)
-#meta_long %>% count(Management)
-#meta_long %>% count(Area)
+meta_long %>% count(Vegetation_type)
+meta_long %>% count(Management)
+meta_long %>% count(Area)
 
-group = c(rep("Caltion", 18), rep("Carex", 21),
+group2 = c(rep("Calthion", 18), rep("Carex", 21),
           rep("Mountain Meadow", 29), rep("Nardetum", 30))
 colours = c(rep("yellow", 18), rep("orange", 21),
             rep("red", 29), rep("purple", 30))
@@ -274,11 +282,11 @@ colours = c(rep("yellow", 18), rep("orange", 21),
 # Plot convex hulls with colors based on the group identity
 ordiplot(NMDS3, type = "n")
 
-for(i in unique(group)) {
-  ordihull(NMDS3$point[grep(i, group),], draw="polygon",
-           groups = group[group == i],col = colours[grep(i,group)],label=F) } 
+for(i in unique(group2)) {
+  ordihull(NMDS3$point[grep(i, group2),], draw="polygon",
+           groups = group2[group2 == i],col = colours[grep(i,group2)],label=F) } 
 
-orditorp(NMDS3, display = "species", col = "red", air = 0.01)
+#orditorp(NMDS3, display = "species", col = "red", air = 0.01)
 orditorp(NMDS3, display = "sites", col = c(rep("yellow", 18), rep("orange", 21),
                                            rep("red", 29), rep("purple", 30)), air = 0.01, cex = 1.25)
 
@@ -287,8 +295,8 @@ orditorp(NMDS3, display = "sites", col = c(rep("yellow", 18), rep("orange", 21),
 NMDS4 <- metaMDS(species4, k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
 
 
-group = c(rep("brach", 48), rep("mahd", 21), rep("weide", 29))
-colours = c(rep("brown", 48), rep("light green", 21), rep("dark green", 29))
+#group = c(rep("brach", 48), rep("mahd", 21), rep("weide", 29))
+#colours = c(rep("brown", 48), rep("light green", 21), rep("dark green", 29))
 
 ordiplot(NMDS4, type = "n")
 orditorp(NMDS4, display = "sites", col = c(rep("brown", 48), rep("light green", 21), 
@@ -298,8 +306,8 @@ orditorp(NMDS4, display = "sites", col = c(rep("brown", 48), rep("light green", 
 NMDS5 <- metaMDS(species5, k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
 
 
-group = c(rep("Hochschachten", 30), rep("Ruckowitzschachten", 38), rep("weide", 30))
-colours = c(rep("dark blue", 30), rep("light blue", 38), rep("green", 30))
+#group = c(rep("Hochschachten", 30), rep("Ruckowitzschachten", 38), rep("weide", 30))
+#colours = c(rep("dark blue", 30), rep("light blue", 38), rep("green", 30))
 
 ordiplot(NMDS5, type = "n")
 orditorp(NMDS5, display = "sites", col = c(rep("dark blue", 30), rep("light blue", 38), rep("green", 30))
@@ -362,55 +370,108 @@ plot(ef, p.max = 0.05)
 
 
 # Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
-group = c(rep("brach", 48), rep("mahd", 21), rep("weide", 29))
+group1 = c(rep("brach", 48), rep("mahd", 21), rep("weide", 29))
 
 # Create a vector of color values with same length as the vector of group values
 colors = c(rep("brown", 48), rep("light green", 21), rep("dark green", 29))
 
 # Plot convex hulls with colors based on the group identity
 ordiplot(NMDS2, type = "n")
-for(i in unique(group)) {
-  ordihull(NMDS2$point[grep(i, group),], draw="polygon",
-           groups = group[group == i],col = colors[grep(i,group)],label=F) } 
+for(i in unique(group1)) {
+  ordihull(NMDS2$point[grep(i, group1),], draw="polygon",
+           groups = group1[group1 == i],col = colors[grep(i,group1)],label=F) } 
 
 #orditorp(NMDS2, display = "species", col = "red", air = 0.01)
 orditorp(NMDS2, display = "sites", col = c(rep("brown", 48), 
                      rep("light green", 21), rep("dark green", 29)), air = 0.01, cex = 1.25)
 
 
+# Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
+group3 = c(rep("Hochschachten", 30), rep("Ruckowitzschachten", 38), rep("weide", 30))
+
+# Create a vector of color values with same length as the vector of group values
+colors2 = c(rep("dark blue", 30), rep("light blue", 38), rep("green", 30))
+
+ordiplot(NMDS5, type = "n")
+for(i in unique(group2)) {
+  ordihull(NMDS2$point[grep(i, group3),], draw="polygon",
+           groups = group3[group3 == i],col = colors2[grep(i,group3)],label=F) } 
+
+#orditorp(NMDS2, display = "species", col = "red", air = 0.01)
+orditorp(NMDS5, display = "sites", col = c(rep("dark blue", 30), rep("light blue", 38), 
+                                           rep("green", 30)), air = 0.01, cex = 1.25)
+
+###PCA
+
+pca1 <- prcomp(species4.2, center = TRUE,scale. = TRUE) #didn't work bc empty columns
+species4.2 <- species4[,apply(species4, 2, var, na.rm=TRUE) != 0] #remove column with all 0?
+
+pca1 <- prcomp(species4)
+summary(pca1) #1+2 -> 78%, +3 -> 82% #after removing 0s waaay lower
+str(pca1)
+
+#library(devtools)
+install_github("vqv/ggbiplot")
+
+library(ggbiplot)
+library(gridExtra)
+ggbiplot(pca1, labels=rownames(species4.2), groups = group1)
+
 ###adonis
-all.sites<-rbind(sites.a,sites.b,sites.c)
-
-trt<-rep(c("C","H","L"),each=nrow(sites.a))
-
-adon.results<-adonis(species4 ~ group, method="bray",perm=999)
+adon.results<-adonis(species4 ~ group1, method="bray",perm=999)
 print(adon.results)
 
 ## Bray-Curtis distances between samples
 dis <- vegdist(species4)
 
 ## Calculate multivariate dispersions
-mod <- betadisper(dis, group)
+mod <- betadisper(dis, group1)
 mod
 
-##difr website
-otu <- abundances(pseq.rel)
-meta <- meta(pseq.rel)
+# diffr groups -> not v helpful
+adon.veg <-adonis(species3 ~ group2, method="bray",perm=999)
+print(adon.veg)
 
-permanova <- adonis(t(abundance$species) ~ group,
-                    data = meta_long2, permutations=99, method = "bray")
+## Bray-Curtis distances between samples
+dis2 <- vegdist(species3)
 
-# P-value
-#print(as.data.frame(permanova$aov.tab)["group", "Pr(>F)"])
-print(as.data.frame(adon.results$aov.tab)["group", "Pr(>F)"])
+## Calculate multivariate dispersions
+mod2 <- betadisper(dis2, group2)
+mod
+
+### check normality ----
+
+Schacht <- subset(abundance, Area == "Schachtenhaus", 
+                  select = c(plot, species, Vegetation_type, Management))
+Ruck <- subset(abundance, Area == "Ruckowitzschachten", 
+               select = c(plot, species, Vegetation_type, Management))
+Hoch <- subset(abundance, Area == "Hochschachten",
+               select = c(plot, species, Vegetation_type, Management))
+
+#Normalverteilung: 
+shapiro.test(Schacht$species) #p-value = 0.08003   #N-Verteilung ja nur bei v2$Arten net
+shapiro.test(Ruck$species) #0.221 -> normal?
+shapiro.test(Hoch$species) #p-value = 0.0006596 -> not normal?
+#value is not less than .05, we can assume the sample data comes from a 
+    #population that is normally distributed.
+
+hist(Ruck$species, breaks = 15)
+
+library(car)
+leveneTest(abundance$species, abundance$Area, center=mean) 
 
 
-#checking homogeneity cond
-dist <- vegdist(t(otu))
+### GLMs ----
+plantlm1 <- lm(species~Management*Vegetation_type, data = abundance)
+summary(plantlm1)
+anova(plantlm1)
 
-#investigate top factors
-coef <- coefficients(permanova)["group1",]
-top.coef <- coef[rev(order(abs(coef)))[1:20]]
-par(mar = c(3, 14, 2, 1))
-barplot(sort(top.coef), horiz = T, las = 1, main = "Top taxa")
-anova(betadisper(dist, meta$group))
+plantlm2 <- lm(species~Management*Area, data = abundance)
+summary(plantlm2)
+anova(plantlm2)
+
+library(lme4)
+
+hist(abundance$species) #-> poisson?
+glmer(species ~ Management + (1|Vegetation_type), 
+      data = abundance, family = poisson)
