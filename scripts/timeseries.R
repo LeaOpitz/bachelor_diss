@@ -13,19 +13,23 @@ data <- read.csv2("data/ruc_timeseries.csv")
 
 ###data wrangling ----
 
-colnames(data) <- data[5, ] 
+colnames(data) <- data[10, ] 
 
-data2 <- data %>% subset(X.1!="Höh") %>% 
+data2 <- data %>% subset(var!="Höh") %>% 
   mutate_all(na_if,"") %>% 
   mutate_all(na_if,"-") %>%
-  select(-c(X.1)) %>% 
-  slice(-c(1:3, 6:8, 10:23, 25, 168:170))
+  select(-c(var)) %>% 
+  slice(-c(1:3, 6:8, 11:23, 25, 168:170))
 
 #need to combine Aufbahmejahr: & Aufnahme-Nr.: to get distinct names
 
-colnames(data2) <- data2[2, ] 
+#colnames(data2) <- data2[2, ] 
 
-sp <- data2 %>% slice(-c(1:18))
+sp <- data2 %>% slice(-c(1:20)) %>% 
+  select(-c(type)) %>% 
+  column_to_rownames(var = "ID")
+
+
 #### isla's betadiv code ----
 
 
