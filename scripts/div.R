@@ -11,7 +11,7 @@ library(tidyverse)
 library(janitor)
 library(vegan)
 
-#load data ----
+#load data OG----
 
 #own data
 hoch1 <- read.csv2("data/data_hoch.csv") 
@@ -67,14 +67,14 @@ write.csv2(all_data, "C:/Users/Lea/Documents/R/git/bachelor_diss/data/full_list.
 sp_list <- all_data %>% slice(-c(4:8, 10:24, 162:166, 195:197)) %>% #remove unnecerssary rows
   janitor::row_to_names(1) #plot-ID as column name
 
-
+### load revised data ----
 # conny combined columns, I added red list column
 all_data2 <- read.csv2("data/2021_Grasslands_Nationalpark_RE.csv")
 
 sp_list2 <- all_data2 %>% slice(-c(4:8, 10:32)) %>% #remove unnecerssary rows
   janitor::row_to_names(1) #plot-ID as column name
 
-sp_list3 <- sp_list2 %>% arrange()
+#sp_list3 <- sp_list2 %>% arrange()
 
 metadata <- sp_list2 %>% slice(c(1:3)) %>% 
   select(-c("Type", "red_list"))
@@ -218,7 +218,23 @@ res
   theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
 
 res2 <-  boxplot(species~Area, data = abundance)
-res2
+res2 #medians: 12, 13, 13
+
+# rare mean
+rare_mean2 <- abundance %>%
+  group_by(Management) %>%
+  mutate(mean_by_group = mean(prop_rare)) %>% 
+  mutate(standard_error(prop_rare))
+
+(box_man_rare <- ggplot(data= abundance, aes(x= as.factor(Management), y = prop_rare, fill = Management))+
+    geom_boxplot(size = 0.3) +
+    theme_classic()+ 
+    #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
+    # values = c("#FEB96C", "#CC92C2"))+
+    scale_x_discrete(name = "\ntypes of managemnt") +
+    scale_y_continuous(name = "proportion red list species\n")+
+    theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
+
 
 ## Evenness
 # Shannon index
@@ -226,11 +242,14 @@ H <- diversity(abundance$species) #4.4077
 #Pielou’s evenness J=H′/log(S)
 J <- H/log(specnumber(abundance$species)) #0.9613
 
-#by subgroup? 
-H <- abundance %>% group_by(Management) %>%
-      diversity(abundance$species)
+#by subgroup? -> same result
+sapply(abundance, class)    
+abundance$species <- as.numeric(as.character(abundance$species))  # Convert one variable to numeric 
 
-abundance$species <- as.numeric(as.character(abundance$species)) 
+abundance3 <- abundance %>% group_by(Management)
+H2 <-   diversity(abundance3$species)
+
+
 #betadiv:
     #betadiver(x, method = NA, order = FALSE, help = FALSE, ...)
     #method: Bray-Curtis ((A+B-2*J)/(A+B)	"minimum"	Bray-Curtis)
@@ -458,8 +477,14 @@ shapiro.test(Hoch$species) #p-value = 0.0006596 -> not normal?
 hist(Ruck$species, breaks = 15)
 
 library(car)
-leveneTest(abundance$species, abundance$Area, center=mean) 
+leveneTest(abundance$species, abundance$Area, center=mean) #-> 0.3437 -> over 0.05 -> equal variance
+#less than our significance level of 0.05. Thus, we reject the null hypothesis and 
+    #conclude that the variance among the three groups is not equal.
 
+#Man-Whitney-U-Test:
+wilcox.test(Schacht$species,Ruck$species) #p-value = 0.616
+wilcox.test(Ruck$species,Hoch$species) #p-value = 0.2497
+wilcox.test(Hoch$species,Schacht$species) #p-value = 0.4279
 
 ### GLMs ----
 plantlm1 <- lm(species~Management*Vegetation_type, data = abundance)
@@ -475,3 +500,111 @@ library(lme4)
 hist(abundance$species) #-> poisson?
 glmer(species ~ Management + (1|Vegetation_type), 
       data = abundance, family = poisson)
+
+
+glmer(species ~ Management + (1|Area), 
+                 data = abundance, family = poisson)
+
+glmer(species ~ Management + (1|Vegetation_type) + (1|Area), 
+      data = abundance, family = poisson)
+
+
+### indices ----
+indices <- read.csv2("data/zeigerwerte.csv") %>% 
+  mutate_all(na_if,"") %>% 
+  mutate_all(na_if,"x")
+
+ellenberg <- indices %>% select(-c(6:8)) 
+
+ellenberg[is.na(ellenberg)] <- 0 #NA <- 0
+ellenberg <-column_to_rownames(ellenberg, var = "sp")
+ellenberg[] <- lapply(ellenberg, as.numeric)
+ellenberg <- rownames_to_column(ellenberg, var = "sp")
+
+ellen_long <- data_long %>% 
+  left_join(ellenberg, by = c("sp")) %>% 
+  select(-c("Type", "red_list")) #%>% 
+
+## this isn't working bc 0.5 is read as 0,5 and therefore a character and 
+    #can't be used in calculations 
+sapply(ellen_long, class)    
+ellen_long$cover <- as.numeric(as.character(ellen_long$cover))  # Convert one variable to numeric 
+
+
+str(data_long)
+ellenlong2 <- ellen_long %>% mutate(L = cover*L) %>%
+  mutate(F = cover*F) %>%
+  mutate(R = cover*R) %>%
+  mutate(N = cover*N) %>% 
+  select(-c(Vegetation_type, Management, Area)) #%>% 
+ # group_by(plot)
+
+L <- ellenlong2 %>% select(sp, plot, cover,L) %>%   
+  mutate_at(vars(-group_cols()),na_if,"0") %>%  #replace empty cells with NA
+  drop_na(L) #remove empty columns
+
+L2 <- L %>% 
+  group_by(plot) %>% 
+  summarise(cover = sum(cover)) #%>%
+
+L3 <- L %>% 
+  group_by(plot) %>% 
+  summarise(L = sum(L))
+
+L4 <- L2 %>%  left_join(L3, by = "plot") %>%
+  mutate(result_L = L/cover)
+
+
+F2 <- ellenlong2 %>% select(sp, plot, cover,F) %>%   
+  mutate_at(vars(-group_cols()),na_if, "0") %>%  #replace empty cells with NA
+  drop_na(F) #remove empty columns
+  #group_by(plot) %>%
+  
+  F3 <- F2 %>% 
+    group_by(plot) %>% 
+  summarise(cover = sum(cover)) #%>%
+  
+  F4 <- F2 %>% 
+    group_by(plot) %>% 
+  summarise(F = sum(F))
+
+F5 <- F3 %>%  left_join(F4, by = "plot") %>%
+  mutate(result_F = F/cover)
+
+
+R <- ellenlong2 %>% select(sp, plot, cover,R) %>%   
+  mutate_at(vars(-group_cols()),na_if,"0") %>%  #replace empty cells with NA
+  drop_na(R) #remove empty columns
+
+R2 <- R %>% 
+  group_by(plot) %>% 
+  summarise(cover = sum(cover)) #%>%
+
+R3 <- R %>% 
+  group_by(plot) %>% 
+  summarise(R = sum(R))
+
+R4 <- R2 %>%  left_join(R3, by = "plot") %>%
+  mutate(result_R = R/cover)
+
+N <- ellenlong2 %>% select(sp, plot, cover,N) %>%   
+  mutate_at(vars(-group_cols()),na_if,"0") %>%  #replace empty cells with NA
+  drop_na(N)
+
+N2 <- N %>% 
+  group_by(plot) %>% 
+  summarise(cover = sum(cover)) #%>%
+
+N3 <- N %>% 
+  group_by(plot) %>% 
+  summarise(N = sum(N))
+
+N4 <- N2 %>%  left_join(N3, by = "plot") %>%
+  mutate(result_N = N/cover)
+
+ellenberg_results <- L4 %>% 
+  left_join(F5, by = "plot") %>% 
+  left_join(R4, by = "plot") %>% 
+  left_join(N4, by = "plot") %>% 
+  select(c(plot, result_L, result_F, result_R, result_N)) %>% 
+  left_join(meta_long, by = "plot")
