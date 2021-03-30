@@ -10,6 +10,7 @@
 library(tidyverse)
 library(janitor)
 library(vegan)
+library(wesanderson)
 
 #load data OG----
 
@@ -188,21 +189,30 @@ mean4 <- abundance2 %>%
 (box_man <- ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
   geom_boxplot(size = 0.3) +
   theme_classic()+ 
-  #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
-   # values = c("#FEB96C", "#CC92C2"))+
-  scale_x_discrete(name = "\ntypes of managemnt") +
-  scale_y_continuous(name = "# species\n")+
+  scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
+    values = c("#EEB422", "#7FFF00", "#228B22"))+
+  scale_x_discrete(name = "\nTypes of management") +
+  scale_y_continuous(name = "Number of species\n")+
   theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
 
 res <-  boxplot(species~Management, data = abundance) #medians   8.5   16   13
 res
 
+(split_plot <- ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
+  geom_boxplot(size = 0.3) +
+  theme_minimal() +  
+  facet_wrap(~ Vegetation_type) + # create a facet for each mountain range
+    scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
+      values = c("#EEB422", "#7FFF00", "#228B22"))+
+    scale_x_discrete(name = "\nTypes of management") +
+    scale_y_continuous(name = "Number of species\n"))
 
 (box_veg <- ggplot(data= abundance, aes(x= as.factor(Vegetation_type), y = species, fill = Vegetation_type))+
   geom_boxplot(size = 0.3) +
   theme_classic()+ 
   #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
   # values = c("#FEB96C", "#CC92C2"))+
+    
   scale_x_discrete(name = "\nvegetation types") +
   scale_y_continuous(name = "# species\n")+
   theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5))
@@ -229,13 +239,14 @@ rare_mean2 <- abundance %>%
 (box_man_rare <- ggplot(data= abundance, aes(x= as.factor(Management), y = prop_rare, fill = Management))+
     geom_boxplot(size = 0.3) +
     theme_classic()+ 
-    #scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
-    # values = c("#FEB96C", "#CC92C2"))+
-    scale_x_discrete(name = "\ntypes of managemnt") +
-    scale_y_continuous(name = "proportion red list species\n")+
+    scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
+     values = c("#EEB422", "#7FFF00", "#228B22"))+
+    scale_x_discrete(name = "\nTypes of management") +
+    scale_y_continuous(name = "Proportion of red list species \n")+
     theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
 
-
+#wes_palette("GrandBudapest1")
+#c("#EEB422", "#7FFF00", "#228B22")
 ## Evenness
 # Shannon index
 H <- diversity(abundance$species) #4.4077
@@ -287,9 +298,9 @@ orditorp(NMDS3, display = "sites", cex = 1.1, air = 0.01)
 ## sites
 # Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
 #group = c(rep("Blackford", 28), rep("Craigmillar", 28))
-meta_long %>% count(Vegetation_type)
-meta_long %>% count(Management)
-meta_long %>% count(Area)
+#meta_long %>% count(Vegetation_type)
+#meta_long %>% count(Management)
+#meta_long %>% count(Area)
 
 group2 = c(rep("Calthion", 18), rep("Carex", 21),
           rep("Mountain Meadow", 29), rep("Nardetum", 30))
@@ -473,6 +484,9 @@ shapiro.test(Ruck$species) #0.221 -> normal?
 shapiro.test(Hoch$species) #p-value = 0.0006596 -> not normal?
 #value is not less than .05, we can assume the sample data comes from a 
     #population that is normally distributed.
+qqnorm(abundance$species)
+qqline(abundance$species, col = "blue")
+shapiro.test(abundance$species) #0.0029 -> non-normal
 
 hist(Ruck$species, breaks = 15)
 
@@ -486,20 +500,43 @@ wilcox.test(Schacht$species,Ruck$species) #p-value = 0.616
 wilcox.test(Ruck$species,Hoch$species) #p-value = 0.2497
 wilcox.test(Hoch$species,Schacht$species) #p-value = 0.4279
 
+library(olsrr)
+plantlm01 <- lm(species~Management, data = abundance)
+ols_test_normality(plantlm01)
+plantlm02 <- lm(species~Vegetation_type, data = abundance)
+ols_test_normality(plantlm02)
+
+plant
 ### GLMs ----
 plantlm1 <- lm(species~Management*Vegetation_type, data = abundance)
 summary(plantlm1)
 anova(plantlm1)
+ols_test_normality(plantlm1)
+ols_plot_resid_hist(plantlm1)
+
 
 plantlm2 <- lm(species~Management*Area, data = abundance)
 summary(plantlm2)
 anova(plantlm2)
 
+plantlm3 <- lm(species~Area, data = abundance)
+summary(plantlm3)
+anova(plantlm3)
+
 library(lme4)
 
+#random effect using the syntax (1|variableName):
+    #random effect to have at least five levels
+# -> I have to used fixed effects
+
 hist(abundance$species) #-> poisson?
-glmer(species ~ Management + (1|Vegetation_type), 
+glmm1 <- glmer(species ~ Management + (1|Vegetation_type), 
       data = abundance, family = poisson)
+summary(glmm1)
+
+plot(glmm1)
+qqnorm(resid(glmm1))
+qqline(resid(glmm1))
 
 
 glmer(species ~ Management + (1|Area), 
@@ -508,12 +545,28 @@ glmer(species ~ Management + (1|Area),
 glmer(species ~ Management + (1|Vegetation_type) + (1|Area), 
       data = abundance, family = poisson)
 
+glm2 <- glm(species ~ Management , 
+              data = abundance, family = poisson)
+summary(glm2)
+
+glm3 <- glm(species ~ Vegetation_type, 
+              data = abundance, family = poisson)
+summary(glm3)
+
+glm4 <- glm(species ~ Management + Vegetation_type, 
+            data = abundance, family = poisson)
+summary(glm4)
+qqnorm(resid(glm4))
+qqline(resid(glm4))
+
+
 
 ### indices ----
 indices <- read.csv2("data/zeigerwerte.csv") %>% 
   mutate_all(na_if,"") %>% 
   mutate_all(na_if,"x")
 
+#Ellenberg
 ellenberg <- indices %>% select(-c(6:8)) 
 
 ellenberg[is.na(ellenberg)] <- 0 #NA <- 0
@@ -607,4 +660,78 @@ ellenberg_results <- L4 %>%
   left_join(R4, by = "plot") %>% 
   left_join(N4, by = "plot") %>% 
   select(c(plot, result_L, result_F, result_R, result_N)) %>% 
+  left_join(meta_long, by = "plot")
+
+#Briemle
+briemle <- indices %>% select(-c(2:5))
+
+briemle[is.na(briemle)] <- 0 #NA <- 0
+briemle <-column_to_rownames(briemle, var = "sp")
+briemle[] <- lapply(briemle, as.numeric)
+briemle <- rownames_to_column(briemle, var = "sp")
+
+briemle_long <- data_long %>% 
+  left_join(briemle, by = c("sp")) %>% 
+  select(-c("Type", "red_list")) #%>% 
+
+briemle_long$cover <- as.numeric(as.character(briemle_long$cover))
+
+briemle_long2 <- briemle_long %>% mutate(mowing_tol = cover*mowing_tol) %>%
+  mutate(grazing_tol = cover*grazing_tol) %>%
+  mutate(foraging_val = cover*foraging_val) 
+
+mow <- briemle_long2 %>% select(sp, plot, cover, mowing_tol) %>%   
+  mutate_at(vars(-group_cols()),na_if,"0") %>%  #replace empty cells with NA
+  drop_na(mowing_tol) #remove empty columns
+
+mow2 <- mow %>% 
+  group_by(plot) %>% 
+  summarise(cover = sum(cover)) #%>%
+
+mow3 <- mow %>% 
+  group_by(plot) %>% 
+  summarise(mowing_tol = sum(mowing_tol))
+
+mow4 <- mow2 %>%  left_join(mow3, by = "plot") %>%
+  mutate(result_mow = mowing_tol/cover)
+
+graze <- briemle_long2 %>% select(sp, plot, cover, grazing_tol) %>%   
+  mutate_at(vars(-group_cols()),na_if,"0") %>%  #replace empty cells with NA
+  drop_na(grazing_tol) #remove empty columns
+
+graze2 <- graze %>% 
+  group_by(plot) %>% 
+  summarise(cover = sum(cover)) #%>%
+
+graze3 <- graze %>% 
+  group_by(plot) %>% 
+  summarise(grazing_tol = sum(grazing_tol))
+
+graze4 <- graze2 %>%  left_join(graze3, by = "plot") %>%
+  mutate(result_graze = grazing_tol/cover)
+
+forage <- briemle_long2 %>% select(sp, plot, cover, foraging_val) %>%   
+  mutate_at(vars(-group_cols()),na_if,"0") %>%  #replace empty cells with NA
+  drop_na(foraging_val) #remove empty columns
+
+forage2 <- forage %>% 
+  group_by(plot) %>% 
+  summarise(cover = sum(cover)) #%>%
+
+forage3 <- forage %>% 
+  group_by(plot) %>% 
+  summarise(foraging_val = sum(foraging_val))
+
+forage4 <- forage2 %>%  left_join(forage3, by = "plot") %>%
+  mutate(result_forage = foraging_val/cover)
+
+indicator_results <- L4 %>% 
+  left_join(F5, by = "plot") %>% 
+  left_join(R4, by = "plot") %>% 
+  left_join(N4, by = "plot") %>% 
+  left_join(mow4, by = "plot") %>% 
+  left_join(graze4, by = "plot") %>%
+  left_join(forage4, by = "plot") %>% 
+  select(c(plot, result_L, result_F, result_R, result_N, 
+           result_mow, result_graze, result_forage)) %>% 
   left_join(meta_long, by = "plot")
