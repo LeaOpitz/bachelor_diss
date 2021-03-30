@@ -29,6 +29,29 @@ sp <- data2 %>% slice(-c(1:20)) %>%
   select(-c(type)) %>% 
   column_to_rownames(var = "ID")
 
+meta <- data2 %>% slice(c(1:3, 5))%>% 
+  select(-c(type)) %>% 
+  column_to_rownames(var = "ID")
+
+sp.long <- sp %>%
+  pivot_longer(c(1:314),names_to = "plot", values_to = "cover") %>% 
+  drop_na(cover) #%>% 
+  #rename(c("sp" = "Plot-ID")) %>% 
+  #group_by(plot)
+
+
+meta.long <- data.frame(t(meta[-1]))
+colnames(meta.long) <- meta[, 1]
+meta.long <- meta.long %>% rownames_to_column(var = "plot")
+
+meta_long2 <- meta_long %>% column_to_rownames(var = "plot")
+
+timeseries.long <- full_join(sp.long, meta.long, by = c("plot"))
+
+series.abundance <- timeseries.long %>% count(plot, name = "species") %>% 
+  full_join(meta.long, by = c("plot"))
+#1st row meta missing!! figure out later
+
 
 #### isla's betadiv code ----
 
