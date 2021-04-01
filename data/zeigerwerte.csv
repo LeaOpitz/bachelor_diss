@@ -1,0 +1,152 @@
+sp;L;F;R;N;mowing_tol;grazing_tol;foraging_val
+Acer pseudoplatanus;4;6;x;7;;;
+Betula pendula juv.;7;x;x;x;;;
+Fagus sylvatica juv.;3;5;x;x;;;
+Picea abies;5;x;x;x;;;
+Sorbus aucuparia;6;x;4;x;;;
+Agrostis capillaris;7;x;4;4;6;5;6
+Agrostis canina;9;9;3;2;6;3;4
+Anthoxanthum odoratum;x;x;5;x;7;5;4
+Calamagrostis villosa;6;7;2;2;;;
+Carex brizoides ;6;6;4;3;3;5;2
+Carex echinata;8;8;3;2;3;2;2
+Carex flava agg.;8;9;8;2;4;4;2
+Carex leporina;7;7;3;3;5;4;3
+Carex nigra;8;8;3;2;4;4;2
+Carex pallescens;7;6;4;3;4;5;3
+Carex panicea;8;8;x;4;5;4;3
+Carex pilulifera;5;5;3;3;3;4;2
+Carex rostrata;9;10;3;3;4;2;2
+Dactylis glomerata;7;5;x;6;8;4;8
+Deschampsia cespitosa;6;7;x;3;5;7;2
+Deschampsia flexuosa;6;x;2;3;3;4;3
+Eriophorum angustifolium;8;9;4;2;3;3;2
+Festuca rubra agg.;x;6;6;x;9;7;7
+Festuca rubra nigrescens;7;x;3;2;7;4;5
+Glyceria fluitans;7;9;x;7;5;3;5
+Holcus mollis;5;5;2;3;6;7;4
+Juncus articulatus;8;9;8;2;5;7;2
+Juncus bulbosus;6;10;5;2;;;
+Juncus effusus;8;7;3;4;4;7;2
+Juncus filiformis;7;9;4;3;5;3;2
+Juncus tenuis;6;6;5;5;6;9;2
+Luzula campestris;7;4;3;2;5;5;3
+Luzula multiflora;7;5;5;3;6;4;3
+Luzula sylvatica;4;5;4;4;2;4;3
+Nardus stricta;8;x;2;2;3;5;3
+Phleum pratense;7;5;x;6;8;6;9
+Poa humilis;9;5;6;3;;;
+Poa pratensis s.str.;6;5;x;6;9;8;9
+Poa trivialis;6;7;x;7;8;6;7
+Poa supina;8;5;7;7;;;
+Trisetum flavescens;7;x;x;5;7;5;7
+Agrostis stolonifera;8;x;x;5;9;9;4
+Alopecurus pratensis;6;6;6;7;7;4;8
+Luzula pilosa;2;5;5;4;;;
+Poaceae sp.;;;;;;;
+Carex canescens;7;9;4;2;3;4;3
+Achillea millefolium;8;4;x;5;7;4;6
+Aegopodium podagraria ;5;6;7;8;6;2;4
+Ajuga reptans;6;6;6;6;7;5;3
+Alchemilla spec.;6;5;6;6;6;4;6
+Anemone nemorosa;x;5;x;x;5;7;1
+Anthriscus sylvestris;7;5;x;8;7;3;5
+Athyrium filix-femina;3;7;x;6;;;
+Bistorta officinalis;7;7;5;5;6;4;5
+Caltha palustris;7;9;x;x;4;7;1
+Campanula rotundifolia;7;x;x;2;4;4;4
+Cardamine amara;7;9;6;4;;;
+Cardamine pratensis;4;6;x;x;6;7;1
+Callitriche palustris agg.;6;11;5;4;;;
+Cerastium holosteoides;6;5;x;5;8;4;4
+Chaerophyllum hirsutum;6;8;x;7;6;4;2
+Chrysosplenium alternifolium;4;8;7;4;;;
+Chrysosplenium oppositifolium;6;9;5;5;;;
+Circaea alpina;4;7;5;5;;;
+Cirsium palustre;7;8;4;3;3;8;2
+Crepis mollis;8;5;5;5;5;3;5
+Crepis paludosa;7;8;8;6;5;2;5
+Dactylorhiza fuchsii;;;;;;;
+Epilobium montanum;4;5;6;6;2;3;3
+Epilobium palustre;7;9;3;3;3;3;3
+Equisetum sylvaticum;3;7;5;4;;;
+Ficaria verna;4;6;7;7;7;7;1
+Fragaria vesca;7;5;x;6;;;
+Galeopsis tetrahit;7;5;x;6;4;3;2
+Galium palustre agg.;6;9;x;5;4;1;4
+Galium saxatile;7;5;2;3;5;7;4
+Galium uliginosum;6;8;x;2;5;4;4
+Geranium sylvaticum;6;6;6;7;5;2;3
+Glechoma hederacea;6;6;x;7;8;5;2
+Heracleum sphondylium;7;5;x;8;7;3;6
+Hieracium lactucella;8;6;4;2;5;5;3
+Homogyne alpina;6;6;4;2;;;
+Hypericum maculatum;8;6;3;2;3;3;2
+Impatiens glandulifera;5;8;7;7;;;
+Lychnis flos-cuculi;7;7;x;x;4;2;2
+Lysimachia nemorum;2;7;7;7;;;
+Lysimachia vulgaris;6;8;x;x;3;2;3
+Maianthemum bifolium;3;5;3;3;;;
+Mentha arvensis;7;8;x;x;5;8;2
+Myosotis scorpioides agg.;7;8;x;5;5;4;3
+Oxalis acetosella;1;5;4;6;;;
+Pedicularis sylvatica;7;8;1;2;4;7;1
+Pinguicula vulgaris;8;8;7;2;3;5;2
+Plantago lanceolata;6;x;x;x;7;6;7
+Potentilla erecta;6;x;x;2;3;4;3
+Prunella vulgaris;7;5;7;x;9;8;3
+Ranunculus acris;7;6;x;x;6;5;2
+Ranunculus flammula;7;9;3;2;4;7;1
+Ranunculus repens;6;7;x;x;8;7;3
+Rhinanthus minor;7;x;x;3;5;8;1
+Rumex acetosa;8;x;x;6;6;4;5
+Rumex acetosella;8;4;2;2;7;4;2
+Rumex arifolius;7;6;8;8;;;
+Rumex obtusifolius;7;6;x;9;7;7;2
+Senecio ovatus;7;5;x;8;2;7;1
+Senecio subalpinus;6;8;7;7;;;
+Silene dioica;x;6;7;8;5;2;4
+Soldanella montana;5;6;2;2;;;
+Stellaria alsine;5;8;4;4;4;5;3
+Stellaria graminea;6;4;4;3;4;5;3
+Stellaria nemorum;4;7;5;7;2;2;3
+Taraxacum sect. Ruderalia;7;5;x;7;8;7;7
+Tephroseris crispa;6;8;6;5;;;
+Trifolium pratense;7;x;x;x;7;4;8
+Trifolium repens;8;5;6;6;8;8;9
+Urtica dioica ;x;6;7;8;4;8;2
+Vaccinium myrtillus;5;x;2;3;2;3;2
+Vaccinium vitis-idaea;5;4;2;1;2;4;2
+Valeriana dioica;7;8;5;2;5;3;2
+Veronica beccabunga;7;10;7;6;2;2;2
+Veronica chamaedrys;6;5;x;x;7;6;3
+Veronica scutellata;8;9;3;3;;;
+Veronica officinalis;6;4;3;4;4;4;2
+Viola palustris;6;9;2;3;4;3;2
+Viola riviana;4;4;4;x;;;
+Willemetia stipitata;9;9;7;4;;;
+Botrychium matricariifolium;7;4;3;2;;;
+Dryopteris dilatata;4;6;x;7;;;
+Dryopteris carthusiana;5;x;4;3;;;
+Epilobium angustifolium;8;5;5;8;2;2;3
+Gnaphalium sylvaticum;8;5;4;6;;;
+Impatiens noli-tangere;4;7;7;6;;;
+Lycopodium annotinum;3;6;3;3;;;
+Hieracium pilosella;7;4;x;2;4;7;3
+Polygonatum verticillatum;4;5;4;5;2;7;1
+Ranunculus platanifolius;5;6;x;7;;;
+Trientalis europaea;5;x;3;2;;;
+Viola reichenbachiana;4;6;7;6;;;
+Leucanthemum vulgare;7;4;x;3;6;3;3
+Vicia cracca agg.;7;5;x;x;6;1;7
+Cirsium heterophyllum;7;8;5;6;;;
+Phyteuma nigrum;7;5;5;4;4;2;6
+Digitalis purpurea;7;5;3;6;2;8;1
+Epilobium obscurum;7;8;4;4;;;
+Gentiana pannonica;7;5;1;2;;;
+Sphagnum sec. ;x;x;x;x;x;;
+Climatium dendroides;x;x;x;x;x;;
+Plagiomnium undulatum;x;x;x;x;x;;
+Pellia epiphylla;x;x;x;x;x;;
+Rhytidiadelphus squarrosus;x;x;x;x;x;;
+Polytrichum sp.;x;x;x;x;x;;
