@@ -165,9 +165,9 @@ abundance2 <- abundance %>% select(-c(rare, prop_rare))
  
 str(abundance) 
 ##### Mean of the species column by group 
-mean1 <-  aggregate(x= abundance$species,
-            by= list(abundance$Management),
-            FUN=mean)
+#mean1 <-  aggregate(x= abundance$species,
+  #          by= list(abundance$Management),
+   #         FUN=mean)
 
 standard_error <- function(x) sd(x) / sqrt(length(x)) # Create own function
 
@@ -186,11 +186,13 @@ mean4 <- abundance2 %>%
   mutate(mean_by_group = mean(species)) %>% 
   mutate(standard_error(species))
 
+# noe grazed, mowed, unmanaged; USED TO BE brach, mahd, weide
+# > opposite order
 (box_man <- ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
   geom_boxplot(size = 0.3) +
   theme_classic()+ 
   scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
-    values = c("#EEB422", "#7FFF00", "#228B22"))+
+    values = c("#228B22", "#7FFF00", "#EEB422"))+
   scale_x_discrete(name = "\nTypes of management") +
   scale_y_continuous(name = "Number of species\n")+
   theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
@@ -203,7 +205,7 @@ res
   theme_minimal() +  
   facet_wrap(~ Vegetation_type) + # create a facet for each mountain range
     scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
-      values = c("#EEB422", "#7FFF00", "#228B22"))+
+      values = c("#228B22", "#7FFF00", "#EEB422"))+
     scale_x_discrete(name = "\nTypes of management") +
     scale_y_continuous(name = "Number of species\n"))
 
@@ -240,7 +242,7 @@ rare_mean2 <- abundance %>%
     geom_boxplot(size = 0.3) +
     theme_classic()+ 
     scale_fill_manual(  #scale_fill_manual controls the colours of the 'fill' you specified in the 'ggplot' function.
-     values = c("#EEB422", "#7FFF00", "#228B22"))+
+     values = c("#228B22", "#7FFF00", "#EEB422"))+
     scale_x_discrete(name = "\nTypes of management") +
     scale_y_continuous(name = "Proportion of red list species \n")+
     theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
@@ -274,7 +276,7 @@ designdist
 #needs sp as column names
 
 
-#code field trip ----
+#code field trip (good veg type plot) ----
 # Run the NMDS
 
 set.seed(2)  # Because the final result depends on the initial random placement of the points, we`ll set a seed to make the results reproducible
@@ -342,7 +344,7 @@ NMDS5 <- metaMDS(species5, k = 2, trymax = 100, trace = F, autotransform = FALSE
 ordiplot(NMDS5, type = "n")
 orditorp(NMDS5, display = "sites", col = c(rep("dark blue", 30), rep("light blue", 38), rep("green", 30))
          , air = 0.01, cex = 1.25)
-#code cc tut ----
+#code cc tut (good man plot)----
 
 # Here we use bray-curtis distance, which is recommended for abundance data
 dist <- vegdist(species4,  method = "bray")
@@ -398,12 +400,15 @@ ef
 plot(NMDS2, type = "t", display = "sites")
 plot(ef, p.max = 0.05)
 
+#"#228B22", "#7FFF00", "#EEB422"
 
 # Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
-group1 = c(rep("brach", 48), rep("mahd", 21), rep("weide", 29))
-
+#group1 = c(rep("brach", 48), rep("mahd", 21), rep("weide", 29))
+group1 = c(rep("grazed", 29), rep("mowed", 21),rep("unmanaged", 48))
 # Create a vector of color values with same length as the vector of group values
-colors = c(rep("brown", 48), rep("light green", 21), rep("dark green", 29))
+#colors = c(rep("brown", 48), rep("light green", 21), rep("dark green", 29))
+colors = c(rep("#228B22", 29), rep("#7FFF00", 21),rep("#EEB422", 48))
+
 
 # Plot convex hulls with colors based on the group identity
 ordiplot(NMDS2, type = "n")
@@ -412,8 +417,8 @@ for(i in unique(group1)) {
            groups = group1[group1 == i],col = colors[grep(i,group1)],label=F) } 
 
 #orditorp(NMDS2, display = "species", col = "red", air = 0.01)
-orditorp(NMDS2, display = "sites", col = c(rep("brown", 48), 
-                     rep("light green", 21), rep("dark green", 29)), air = 0.01, cex = 1.25)
+orditorp(NMDS2, display = "sites", col = c(rep("#228B22", 29), rep("#7FFF00", 21),
+                                           rep("#EEB422", 48)), air = 0.01, cex = 1.25)
 
 
 # Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
