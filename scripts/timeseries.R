@@ -24,23 +24,27 @@ data2 <- data %>% subset(var!="Höh") %>%
 #need to combine Aufbahmejahr: & Aufnahme-Nr.: to get distinct names
 
 #colnames(data2) <- data2[2, ] 
+sp <- data2 %>% slice(-c(1:20))
 
-sp <- data2 %>% slice(-c(1:20)) %>% 
-  select(-c(type)) %>% 
+sp2 <- data2 %>% slice(-c(1:20)) %>% 
+  select(-c(type, red_list)) %>% 
   column_to_rownames(var = "ID")
 
 meta <- data2 %>% slice(c(1:3, 5))%>% 
-  select(-c(type)) %>% 
+  select(-c(type, red_list))
+
+meta2 <- data2 %>% slice(c(1:3, 5))%>% 
+  select(-c(type, red_list)) %>% 
   column_to_rownames(var = "ID")
 
 sp.long <- sp %>%
-  pivot_longer(c(1:314),names_to = "plot", values_to = "cover") %>% 
+  pivot_longer(-c("type","red_list", "ID"), names_to = "plot", values_to = "cover") %>% 
   drop_na(cover) #%>% 
   #rename(c("sp" = "Plot-ID")) %>% 
   #group_by(plot)
 
 
-meta.long <- data.frame(t(meta[-1]))
+meta.long <- data.frame(t(meta[]))
 colnames(meta.long) <- meta[, 1]
 meta.long <- meta.long %>% rownames_to_column(var = "plot")
 
@@ -48,9 +52,31 @@ meta_long2 <- meta_long %>% column_to_rownames(var = "plot")
 
 timeseries.long <- full_join(sp.long, meta.long, by = c("plot"))
 
-series.abundance <- timeseries.long %>% count(plot, name = "species") %>% 
-  full_join(meta.long, by = c("plot"))
-#1st row meta missing!! figure out later
+#timeseries.long$year[timeseries.long$year  %in% c(“2020”)] <- “2019”
+rare.sp <- timeseries.long %>% group_by(plot) %>% 
+  count(red_list, name = "rare") %>% 
+  subset(red_list!="N")
+
+timeseries.long %>% count(red_list)
+
+series.abundance <- timeseries.long %>% count(plot, name = "species")%>% 
+  full_join(rare.sp, by = c("plot"))  %>% 
+  full_join(meta.long, by = c("plot")) %>% 
+  mutate(prop.rare = rare/ species) %>% 
+  select(-c(red_list))
+
+series.abundance[is.na(series.abundance)] <- 0 
+str(series.abundance)
+#series.abundance <- timeseries.long %>% count(plot, name = "species") %>% 
+ # full_join(meta.long, by = c("plot"))
+#abun.transect <- series.abundance %>% group_by(Transekt.Nr..)
+
+(colour_plot <- ggplot(series.abundance, aes(x = year, y = species, colour = Aufnahme.Nr..)) +
+    geom_point(size = 2) +
+    facet_wrap(~ Transekt.Nr..) +
+    theme_classic() +
+    theme(legend.position = "none"))
+#dev.off()
 
 
 #### isla's betadiv code ----
