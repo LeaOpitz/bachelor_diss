@@ -81,7 +81,15 @@ metadata <- sp_list2 %>% slice(c(1:3)) %>%
   select(-c("Type", "red_list"))
 just_sp <- sp_list2 %>% slice(-c(1:3))
   
+cover <- all_data2 %>% slice(c(1, 13,15,17, 19,21,24)) %>% #remove unnecerssary rows
+  janitor::row_to_names(1) %>% #plot-ID as column name
+  rownames_to_column(var = "no") %>% 
+  select(-c(Type, red_list, no)) %>% 
+  column_to_rownames(var= "Plot-ID")
 
+cover[is.na(cover)] <- 0 #NA <- 0
+cover_long <- data.frame(t(cover)) %>% 
+  rownames_to_column(var = "plot")
 #longform 
 
 sp_long <- just_sp %>%
@@ -100,7 +108,7 @@ meta_long2 <- meta_long %>% column_to_rownames(var = "plot")
 #join longform
 data_long <- full_join(sp_long, meta_long, by = c("plot"))
 
-#NMDS data
+#NMDS data ----
 species <- just_sp %>% select(-c("Type", "red_list")) #delete unnecessary columns
 
 species <- data.frame(t(species)) #switch rows and columns
@@ -186,6 +194,8 @@ mean4 <- abundance2 %>%
   mutate(mean_by_group = mean(species)) %>% 
   mutate(standard_error(species))
 
+### boxplots ----
+
 # noe grazed, mowed, unmanaged; USED TO BE brach, mahd, weide
 # > opposite order
 (box_man <- ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
@@ -197,8 +207,11 @@ mean4 <- abundance2 %>%
   scale_y_continuous(name = "Number of species\n")+
   theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
 
-res <-  boxplot(species~Management, data = abundance) #medians   8.5   16   13
+res <-  boxplot(species~Management, data = abundance) #medians   13 15.0   10
 res
+
+res_rare <-  boxplot(prop_rare~Management, data = abundance) #medians all 0
+res_rare
 
 (split_plot <- ggplot(data= abundance, aes(x= as.factor(Management), y = species, fill = Management))+
   geom_boxplot(size = 0.3) +
@@ -247,13 +260,59 @@ rare_mean2 <- abundance %>%
     scale_y_continuous(name = "Proportion of red list species \n")+
     theme(text=element_text(size = 18), axis.line = element_line(size = 0.5), axis.ticks = element_line(size = 0.5)))
 
+#plot from gergana
+source("https://gist.githubusercontent.com/benmarwick/2a1bb0133ff568cbe28d/raw/fb53bd97121f7f9ce947837ef1a4c65a73bffb3f/geom_flat_violin.R")
+
+(funky_plot_abundance <- 
+    ggplot(data = abundance, 
+           aes(x = Management, y = species, fill = Management)) +
+    geom_flat_violin(position = position_nudge(x = .2, y = 0), alpha = .8) +
+    geom_point(aes(y = species, color = Management), 
+               position = position_jitter(width = .15), alpha = 0.5)+#, size = .5, alpha = 0.2) +
+    geom_boxplot(width = .3, outlier.shape = NA, alpha = 0.8) +
+    labs(y = "Species richness\n", x = "\nTypes of Management") +
+    #guides(fill = FALSE, color = FALSE) +
+    theme_classic() +
+    theme(legend.position = "none") +
+    scale_colour_manual(values = c("#228B22", "#7FFF00", "#EEB422")) +
+    scale_fill_manual(values = c("#228B22", "#7FFF00", "#EEB422"))) #+
+    #geom_hline(yintercept = 0, colour = "grey30", linetype = "dashed") +
+    #theme_bw() +
+    #scale_y_continuous(limits = c(-0.24, 0.24),
+      #                 breaks = c(-0.2, -0.1, 0, 0.1, 0.2),
+       #                labels = c("-0.2", "-0.1", "0", "0.1", "0.2")) +
+    #raincloud_theme +
+    #theme_LPI3())
+
+
+(funky_plot_rare <- 
+    ggplot(data = abundance, 
+           aes(x = Management, y = prop_rare, fill = Management)) +
+    geom_flat_violin(position = position_nudge(x = .2, y = 0), alpha = .8) +
+    geom_point(aes(y = prop_rare, color = Management), 
+               position = position_jitter(width = .15), alpha = 0.5)+#, size = .5, alpha = 0.2) +
+    geom_boxplot(width = .3, outlier.shape = NA, alpha = 0.8) +
+    labs(y = "Proportion of Red List species\n", x = "\nTypes of Management") +
+    #guides(fill = FALSE, color = FALSE) +
+    theme_classic() +
+    theme(legend.position = "none") +
+    scale_colour_manual(values = c("#228B22", "#7FFF00", "#EEB422")) +
+    scale_fill_manual(values = c("#228B22", "#7FFF00", "#EEB422")))
+
+
 #wes_palette("GrandBudapest1")
 #c("#EEB422", "#7FFF00", "#228B22")
-## Evenness
+
+
+## Evenness ----####
 # Shannon index
-H <- diversity(abundance$species) #4.4077
+H <- diversity(abundance$species) #4.4077 -> the bigger the number
 #Pielou’s evenness J=H′/log(S)
 J <- H/log(specnumber(abundance$species)) #0.9613
+
+
+#evenness per plot level or per managemnt type
+
 
 #by subgroup? -> same result
 sapply(abundance, class)    
@@ -436,17 +495,18 @@ for(i in unique(group2)) {
 orditorp(NMDS5, display = "sites", col = c(rep("dark blue", 30), rep("light blue", 38), 
                                            rep("green", 30)), air = 0.01, cex = 1.25)
 
-###PCA
+###PCA ----
 
-pca1 <- prcomp(species4.2, center = TRUE,scale. = TRUE) #didn't work bc empty columns
 species4.2 <- species4[,apply(species4, 2, var, na.rm=TRUE) != 0] #remove column with all 0?
+pca1 <- prcomp(species4.2, center = TRUE,scale. = TRUE) #didn't work bc empty columns
+
 
 pca1 <- prcomp(species4)
 summary(pca1) #1+2 -> 78%, +3 -> 82% #after removing 0s waaay lower
 str(pca1)
 
 #library(devtools)
-install_github("vqv/ggbiplot")
+#install_github("vqv/ggbiplot")
 
 library(ggbiplot)
 library(gridExtra)
@@ -535,6 +595,7 @@ library(lme4)
 # -> I have to used fixed effects
 
 hist(abundance$species) #-> poisson?
+hist(abundance$prop_rare)
 glmm1 <- glmer(species ~ Management + (1|Vegetation_type), 
       data = abundance, family = poisson)
 summary(glmm1)
@@ -554,17 +615,128 @@ glm2 <- glm(species ~ Management ,
               data = abundance, family = poisson)
 summary(glm2)
 
+glm2.2 <- glm(prop_rare ~ Management , 
+            data = abundance, family = poisson)
+summary(glm2.2)
+
+
 glm3 <- glm(species ~ Vegetation_type, 
               data = abundance, family = poisson)
 summary(glm3)
 
-glm4 <- glm(species ~ Management + Vegetation_type, 
+glm4 <- glm(species ~ Management + Vegetation_type, #veg fixed effect
             data = abundance, family = poisson)
-summary(glm4)
+summary(glm4) #0.064
 qqnorm(resid(glm4))
 qqline(resid(glm4))
 
+glm4.2 <- glm(prop_rare ~ Management + Vegetation_type, 
+            data = abundance, family = poisson)
+summary(glm4.2)
 
+glm5 <- glmer(species ~ Management + (1|Vegetation_type), #veg random effect
+            data = abundance, family = poisson)
+summary(glm5) #0.0677
+qqnorm(resid(glm5))
+qqline(resid(glm5))
+
+glm5.2 <- glmer(prop_rare ~ Management + (1|Vegetation_type), 
+              data = abundance, family = poisson)
+summary(glm5.2)
+
+glm6 <- glm(species ~ Management * Vegetation_type, #interaction with fixed effect
+            data = abundance, family = poisson)
+summary(glm6)
+qqnorm(resid(glm6))
+qqline(resid(glm6))
+
+glm7 <- glm(species ~ Management + Vegetation_type + result_F + result_R, #fixed veg and idic
+            data = final_data, family = poisson)
+summary(glm7) #0.1287 unm
+
+glm7.2 <- glm(prop_rare ~ Management + Vegetation_type + result_F + result_R, #fixed veg and idic
+            data = final_data, family = poisson)
+
+
+glm8 <- glm(species ~ Management + result_F + result_R , #fixed indic
+            data = final_data, family = poisson)
+summary(glm8) #0.0382 mowed
+
+### plot GLM ----
+predict1 <- ggpredict(glm7, terms = c("Management"), type = "fe") 
+predict2 <- ggpredict(glm7.2, terms = c("Management"), type = "fe") 
+
+(pr_abund <- ggplot()+
+  geom_point(data = final_data, aes(x = Management, y= species, 
+                                    colour = Vegetation_type, alpha = 0.5)) +
+  geom_point(data = predict1, aes(x = x, y = predicted, size = 2)) +
+  geom_errorbar(data= predict1, aes(x =x, ymax = conf.high, ymin= conf.low, width = 0.35))+
+  labs(x = "\nManagement", y = "Species Richness\n") + 
+  theme_classic()+
+  theme(legend.position = "right"))
+
+(pr_rare <- ggplot()+
+    geom_point(data = final_data, aes(x = Management, y= prop_rare, colour = Vegetation_type, 
+                                       alpha = 1)) +
+    geom_point(data = predict2, aes(x = x, y = predicted, size = 2)) +
+    geom_errorbar(data= predict2, aes(x =x, ymax = conf.high, ymin= conf.low, width = 0.35))+
+    labs(x = "\nManagement", y = "Proportion of Red List Species\n") + 
+    theme_classic()+
+    theme(legend.position = "right"))
+
+### Tukey ----
+library(emmeans)
+
+aov.plant1 <- aov(species ~ Management + Vegetation_type, data = abundance)
+
+tukey_plants1 <- TukeyHSD(aov.plant1)
+tukey_plants1
+
+aov.plant2 <- aov(species ~ Management * Vegetation_type, data = abundance)
+
+tukey_plants2 <- TukeyHSD(aov.plant2)
+tukey_plants2
+
+#install.packages("lsmeans")
+library(lsmeans)
+
+leastsquare1 = lsmeans(glm4,
+                      pairwise ~ Management,
+                      adjust="tukey")
+
+confint(leastsquare1$contrasts)
+
+leastsquare2 = lsmeans(glm5,
+                       pairwise ~ Management,
+                       adjust="tukey")
+
+confint(leastsquare2$contrasts)
+
+leastsquare3 = lsmeans(glm2,
+                       pairwise ~ Management,
+                       adjust="tukey")
+
+confint(leastsquare3$contrasts)
+
+leastsquare4 = lsmeans(glm4,
+                       pairwise ~ Management:Vegetation_type,
+                       adjust="tukey")
+
+confint(leastsquare4$contrasts)
+
+leastsquare5 = lsmeans(glm7,
+                       pairwise ~ Management,
+                       adjust="tukey")
+
+confint(leastsquare5$contrasts)
+
+#I think this tells me that mowed and grazed are more similar to each other than either to unmanaged
+  #slightly bigger differece mowed-unmanaged
+
+#install.packages("multcomp")
+#library(multcomp)
+#glm_model <- glm( y ~ categorical_variable, data = my_data)
+#glht(glm2, mcp(Management = "Tukey")) #perform TukeyHSD
 
 ### indices ----
 indices <- read.csv2("data/zeigerwerte.csv") %>% 
@@ -738,5 +910,78 @@ indicator_results <- L4 %>%
   left_join(graze4, by = "plot") %>%
   left_join(forage4, by = "plot") %>% 
   select(c(plot, result_L, result_F, result_R, result_N, 
-           result_mow, result_graze, result_forage)) %>% 
-  left_join(meta_long, by = "plot")
+           result_mow, result_graze, result_forage)) #%>% 
+
+
+
+#PCA indic ----
+
+final_data <- abundance %>% 
+  left_join(indicator_results, by = "plot") %>% 
+  left_join(cover_long, by = "plot") %>% 
+  arrange(Management)
+
+indic_pca <- final_data %>% 
+  select(-c(3:6, 15:20)) %>% #take meta and cover out
+  column_to_rownames(var = "plot")
+indic_pca[] <- lapply(indic_pca, as.numeric)
+
+
+pca2 <- prcomp(indic_pca)
+summary(pca2)
+
+
+library(ggbiplot)
+library(gridExtra)
+ggbiplot(pca2, labels=rownames(indicator_results), groups = group1)
+
+adon.results2 <-adonis(indic_pca ~ group1, method="bray",perm=999)
+print(adon.results2)
+
+## Bray-Curtis distances between samples
+dis <- vegdist(indic_pca)
+
+## Calculate multivariate dispersions
+mod <- betadisper(dis, group1)
+mod
+
+set.seed(2) 
+indic_nmds <- metaMDS(indic_pca, distance = "bray", autotransform = FALSE)
+
+indic_fit <- envfit(indic_nmds, indic_pca, permutations = 999)
+
+stressplot(indic_nmds)
+
+head(indic_fit)
+
+plot(indic_nmds, display = "sites", type = "p")
+plot(indic_fit)
+colfactor <- factor(final_data$Management)
+points(indic_nmds, display = "sites", cex = 1, pch = 16, col = c("#228B22","#7FFF00","#EEB422")[colfactor])
+#text(indic_nmds, display = "sites", cex = 1, col = c(1,2,3)[colfactor])
+ordiellipse(indic_nmds, final_data$Management, kind = "ehull",  col = c("#228B22","#7FFF00","#EEB422"), lwd = 3)
+#with(final_data, graphics::legend("topleft", levels(Management), pch = c("#228B22","#7FFF00","#EEB422",) title = "Management"))
+
+
+ind_NMDS <- metaMDS(indic_pca, k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
+
+ordiplot(ind_NMDS, type = "n")
+orditorp(ind_NMDS, display = "sites", col = c(rep("brown", 48), rep("light green", 21), 
+                                           rep("dark green", 29)), air = 0.01, cex = 1.25)
+
+stressplot(ind_NMDS)
+
+# Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
+group1 = c(rep("grazed", 29), rep("mowed", 21),rep("unmanaged", 48))
+# Create a vector of color values with same length as the vector of group values
+colors = c(rep("#228B22", 29), rep("#7FFF00", 21),rep("#EEB422", 48))
+
+
+# Plot convex hulls with colors based on the group identity
+ordiplot(ind_NMDS, type = "n")
+for(i in unique(group1)) {
+  ordihull(ind_NMDS$point[grep(i, group1),], draw="polygon",
+           groups = group1[group1 == i],col = colors[grep(i,group1)],label=F) } 
+
+orditorp(ind_NMDS, display = "sites", col = c(rep("#228B22", 29), rep("#7FFF00", 21),
+                                           rep("#EEB422", 48)), air = 0.01, cex = 1.25)
