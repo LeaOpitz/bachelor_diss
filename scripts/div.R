@@ -441,6 +441,7 @@ plot(NMDS2)
 plot(NMDS2, display = "sites", type = "n")
 points(NMDS2, display = "sites", col = "red", cex = 1.25)
 text(NMDS2, display ="sites")
+#df <- metaMDS(species4, distance = "bray", autotransform = FALSE) -> stress 0.17
 
 # Alternatively, you can use the functions ordiplot and orditorp
 ordiplot(NMDS2, type = "n")
@@ -478,6 +479,16 @@ for(i in unique(group1)) {
 #orditorp(NMDS2, display = "species", col = "red", air = 0.01)
 orditorp(NMDS2, display = "sites", col = c(rep("#228B22", 29), rep("#7FFF00", 21),
                                            rep("#EEB422", 48)), air = 0.01, cex = 1.25)
+
+
+indic_fit3 <- envfit(NMDS2, indic_pca, permutations = 999)
+
+plot(NMDS2, display = "sites", type = "p")
+plot(indic_fit3)
+colfactor <- factor(final_data$Management)
+points(NMDS2, display = "sites", cex = 1, pch = 16, col = c("#228B22","#7FFF00","#EEB422")[colfactor])
+#text(indic_nmds, display = "sites", cex = 1, col = c(1,2,3)[colfactor])
+ordiellipse(NMDS2, final_data$Management, kind = "ehull",  col = c("#228B22","#7FFF00","#EEB422"), lwd = 3)
 
 
 # Define a group variable (first 12 samples belong to group 1, last 12 samples to group 2)
@@ -931,9 +942,9 @@ pca2 <- prcomp(indic_pca)
 summary(pca2)
 
 
-library(ggbiplot)
-library(gridExtra)
-ggbiplot(pca2, labels=rownames(indicator_results), groups = group1)
+#library(ggbiplot)
+#library(gridExtra)
+#ggbiplot(pca2, labels=rownames(indicator_results), groups = group1)
 
 adon.results2 <-adonis(indic_pca ~ group1, method="bray",perm=999)
 print(adon.results2)
@@ -975,6 +986,45 @@ stressplot(ind_NMDS)
 group1 = c(rep("grazed", 29), rep("mowed", 21),rep("unmanaged", 48))
 # Create a vector of color values with same length as the vector of group values
 colors = c(rep("#228B22", 29), rep("#7FFF00", 21),rep("#EEB422", 48))
+
+## with cover
+indic_pca2 <- final_data %>% 
+  select(-c(3:6)) %>% #take meta out
+  column_to_rownames(var = "plot")
+indic_pca2[] <- lapply(indic_pca2, as.numeric)
+
+
+pca3 <- prcomp(indic_pca2)
+summary(pca3)
+
+adon.results3 <-adonis(indic_pca2 ~ group1, method="bray",perm=999)
+print(adon.results3)
+
+## Bray-Curtis distances between samples
+dis2 <- vegdist(indic_pca2)
+
+## Calculate multivariate dispersions
+mod2 <- betadisper(dis2, group1)
+mod2
+
+set.seed(2) 
+indic_nmds2 <- metaMDS(indic_pca2, distance = "bray", autotransform = FALSE)
+
+indic_fit2 <- envfit(indic_nmds2, indic_pca2, permutations = 999)
+
+stressplot(indic_nmds2)
+
+head(indic_fit)
+
+plot(indic_nmds2, display = "sites", type = "p")
+plot(indic_fit2)
+colfactor <- factor(final_data$Management)
+points(indic_nmds2, display = "sites", cex = 1, pch = 16, col = c("#228B22","#7FFF00","#EEB422")[colfactor])
+#text(indic_nmds, display = "sites", cex = 1, col = c(1,2,3)[colfactor])
+ordiellipse(indic_nmds2, final_data$Management, kind = "ehull",  col = c("#228B22","#7FFF00","#EEB422"), lwd = 3)
+#with(final_data, graphics::legend("topleft", levels(Management), pch = c("#228B22","#7FFF00","#EEB422",) title = "Management"))
+
+
 
 
 # Plot convex hulls with colors based on the group identity
