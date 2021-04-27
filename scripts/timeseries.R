@@ -9,7 +9,7 @@ library(tidyverse)
 library(vegan)
 library(betapart)
 library(lme4)
-
+library(viridis)
 
 
 data <- read.csv2("data/ruc_timeseries.csv", dec = ",") 
@@ -65,18 +65,18 @@ rare.sp <- timeseries.long %>% group_by(plot) %>%
   subset(red_list!="N")
 
 timeseries.long %>% count(red_list)
+timeseries.long$cover <- as.numeric(as.character(timeseries.long$cover))
 
 series.abundance <- timeseries.long %>% count(plot, name = "species")%>% 
   full_join(rare.sp, by = c("plot"))  %>% 
   full_join(meta.long, by = c("plot")) %>% 
   mutate(prop.rare = rare/ species) %>% 
-  select(-c(red_list))
+  select(-c(red_list)) %>% arrange((Transekt))
 
 series.abundance[is.na(series.abundance)] <- 0 
 str(series.abundance)
 
 
-timeseries.long$cover <- as.numeric(as.character(timeseries.long$cover))
 
 #series.abundance <- timeseries.long %>% count(plot, name = "species") %>% 
  # full_join(meta.long, by = c("plot"))
@@ -140,6 +140,8 @@ library(ggeffects)
 series.abundance$year <- parse_number(as.character(series.abundance$year))
 series.abundance$year <- series.abundance$year - 2013
 
+
+
 glm08 <- glmer(species ~ year + (1|Aufnahme_Nr), 
               data = series.abundance, family = poisson)
 pred.mm1 <- ggpredict(glm08, terms = c("year"))  # this gives overall predictions for the model
@@ -151,14 +153,14 @@ summary(pred.mm1) # add ci.lvl = 0.95?
 (mixed_effects <- ggplot() +
     geom_line(data = pred.mm1, aes(x = x+2013, y = predicted),
               size = 1) +
-    geom_ribbon(data = pred.mm1, aes(ymin = conf.low, ymax = conf.high, x = x+2013), alpha = 0.7) +
+    geom_ribbon(data = pred.mm1, aes(ymin = conf.low, ymax = conf.high, x = x+2013), alpha = 0.3) +
     geom_point(data = series.abundance, aes(x = year + 2013, y = species, colour = Transekt),
-               alpha = 0.1, size = 2) +
+               alpha = 0.3, size = 2, position = position_jitter(width = .1)) +
     #annotate("text", x = 13, y = 0.6, label = "Slope = 0.025, Std. error = 0.003") +  
     #scale_y_continuous(limits = c (-1, 1)) +
     theme_classic() +
     scale_colour_viridis(discrete = TRUE, option="plasma")+
-    labs(x = "\nYear", y = "Species richness\n"))
+    labs(x = "\nYear", y = " Predicted Species richness\n"))
 
 
 ggsave("outputs/Mixed_effects_model.png", plot = mixed_effects, device = png)
@@ -166,23 +168,28 @@ ggsave("outputs/Mixed_effects_model.png", plot = mixed_effects, device = png)
 #rare sp
 glm08.2 <- glmer(prop.rare ~ year + (1|Aufnahme_Nr), 
                data = series.abundance, family = poisson)
+
+glm08.3 <- glm(prop.rare ~ year + Transekt, 
+                 data = series.abundance, family = quasipoisson)
 pred.mm2 <- ggpredict(glm08.2, terms = c("year"))  # this gives overall predictions for the model
 plot(pred.mm2)
 summary(pred.mm2) # add ci.lvl = 0.95?
 
+pred.mm3 <- ggpredict(glm08.3, terms = c("year")) 
+summary(glm08.3)
 
 # Plot the predictions 
 (mixed_effects2 <- ggplot() +
-    geom_line(data = pred.mm2, aes(x = x+2013, y = predicted),
+    geom_line(data = pred.mm3, aes(x = x+2013, y = predicted),
               size = 1) +
-    geom_ribbon(data = pred.mm2, aes(ymin = conf.low, ymax = conf.high, x = x+2013), alpha = 0.1) +
+    geom_ribbon(data = pred.mm3, aes(ymin = conf.low, ymax = conf.high, x = x+2013), alpha = 0.1) +
     geom_point(data = series.abundance, aes(x = year + 2013, y = prop.rare, colour = Transekt),
-               alpha = 0.1, size = 2) +
+               alpha = 0.3, size = 2, position = position_jitter(width = .2)) +
     #annotate("text", x = 13, y = 0.6, label = "Slope = 0.025, Std. error = 0.003") +  
     #scale_y_continuous(limits = c (-1, 1)) +
     theme_classic() +
-    scale_colour_viridis(discrete = TRUE, option="viridis")+
-    labs(x = "\nYear", y = "Proportion of rare species\n"))
+    scale_colour_viridis(discrete = TRUE, option="plasma")+
+    labs(x = "\nYear", y = "Predicted Proportion of Red List species\n"))
 
 library(viridis)
 ### facet plot w random slope
@@ -229,6 +236,16 @@ ggpredict(glm07, terms = c("year"), type = "re") %>%
     theme_classic() +
     scale_colour_viridis(discrete = TRUE, option="plasma")+
     labs(x = "year", y = "Richness"))
+
+
+(series.p3 <- ggplot(series.abundance, aes(x = year + 2013, y = prop.rare, colour = Transekt)) +
+    geom_point() +
+    geom_smooth(method = glm, colour = "#EEB422", fill = "#EEB422", alpha = 0.3) +
+    facet_wrap(~Weide, nrow=1) +   # a panel for each transekt
+    #scale_x_continuous(breaks = c(1975, 1980, 1985, 1990, 1995, 2000, 2005)) +
+    theme_classic() +
+    scale_colour_viridis(discrete = TRUE, option="plasma")+
+    labs(x = "year", y = "Proportion red list species"))
 
 #ale code
 
@@ -355,7 +372,7 @@ beta_Bray[] <- lapply(beta_Bray, as.numeric)
 beta_Bray <- rownames_to_column(beta_Bray, var = "AreaName")
 
 bray_results <- beta_Bray %>% 
-  left_join(meta.long,by = c("AreaName"="Aufnahme_Nr")) %>% #doesnt work 
+  left_join(meta.long,by = c("AreaName"="Aufnahme_Nr")) %>% 
   select(-c(year))
 
 #abs(sub_bio_presence_matrix)
@@ -366,9 +383,28 @@ hist(bray_results$Bbray)
 glm09 <- lm(Bbray ~ Transekt , 
                data = bray_results)
 summary(glm09)
+plot(glm09)
+pred.mm3 <- ggpredict(glm09, terms = c("Transekt"))  # this gives overall predictions for the model
+plot(pred.mm3) + theme_classic()
+summary(pred.mm3)
+
+
 glm010 <- lmer(Bbray ~ Transekt + (1|Transekt), #lm better
             data = bray_results)
 summary(glm101)
 
 
 hist(bray_results$Bbray)
+
+#not it
+(pr_beta <- ggplot()+
+    geom_point(data = bray_results, aes(x = Transect, y= Bbray,
+                                        colour = Transect, alpha = 0.5),
+               position = position_jitter(width = .15)) +
+    guides(alpha = FALSE)+
+    geom_point(data = pred.bray, aes(x = x, y = predicted, size = 0.7),show.legend = FALSE)  +
+    geom_errorbar(data= pred.bray, aes(x =x, ymax = conf.high, ymin= conf.low, width = 0.35))+
+    labs(x = "\n Transects", y = "Bray-Curtis dissimilarity index\n") + 
+    theme_classic()+
+    scale_colour_viridis(discrete = TRUE, option="plasma")+
+    theme(legend.position = "none"))
