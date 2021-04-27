@@ -315,10 +315,12 @@ source("https://gist.githubusercontent.com/benmarwick/2a1bb0133ff568cbe28d/raw/f
     #guides(fill = FALSE, color = FALSE) +
     theme_classic() +
     theme(legend.position = "none") +
-    scale_colour_manual(values = c("#228B22", "#7FFF00", "#EEB422")) +
-    scale_fill_manual(values = c("#228B22", "#7FFF00", "#EEB422"))) 
+    scale_colour_manual(values = c("#02401B", "#81A88D", "#D8B70A")) +
+    scale_fill_manual(values = c("#02401B", "#81A88D", "#D8B70A"))) 
+#scale_fill_manual(values = c("#228B22", "#7FFF00", "#EEB422"))) 
 
-
+#9C964A graze, #CDC08C mow, #FAD77B umn
+#c("#9C964A", "#CDC08C", "#FAD77B")
 
 (funky_plot_rare <- 
     ggplot(data = abundance, 
@@ -331,9 +333,10 @@ source("https://gist.githubusercontent.com/benmarwick/2a1bb0133ff568cbe28d/raw/f
     #guides(fill = FALSE, color = FALSE) +
     theme_classic() +
     theme(legend.position = "none") +
-    scale_colour_manual(values = c("#228B22", "#7FFF00", "#EEB422")) +
-    scale_fill_manual(values = c("#228B22", "#7FFF00", "#EEB422")))
+    scale_colour_manual(values = c("#02401B", "#81A88D", "#D8B70A")) +
+    scale_fill_manual(values = c("#02401B", "#81A88D", "#D8B70A")))
 
+#D8B70A unm ,#02401B graze ,#81A88D mow OR #A2A475 unm or khaki3
 #### ordination ----
 set.seed(2)
 NMDS <- metaMDS(species3, k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
@@ -351,7 +354,10 @@ colors2 = c(rep("#F1BB7B", 18), rep("#FD6467", 21),
             rep("#5B1A18", 29), rep("#D67236", 30))
 
 colour_wes <- wes_palette("GrandBudapest1")
+colour_wes2 <- wes_palette("Moonrise3") #9C964A graze, #CDC08C mow, #FAD77B umn
+colour_wes3 <- wes_palette("Cavalcanti1") #D8B70A unm ,#02401B graze ,#81A88D mow
 
+colour_wes3 #A2A475
 indic_pca <- final_data %>% 
   select(-c(3:6, 15:20)) %>% #take meta and cover out
   column_to_rownames(var = "plot")
@@ -384,15 +390,18 @@ with(final_data, legend("bottomright", levels(Vegetation_type), pch = 1:4, title
 points(ord, display = "sites", cex = 1, pch = 16, col = c("#228B22","#7FFF00","#EEB422")[colfactor])
 ordiellipse(ord, final_data$Management, kind = "ehull",  col = c("#228B22","#7FFF00","#EEB422"), lwd = 3)
 
+env15 <- envfit(ord ~  result_forage +  Agrostis.capillaris + Achillea.millefolium, 
+                data=Environment3, perm=999)
+
 
 #ordination management
 plot(NMDS2, display = "sites", type = "p")
-plot(env, col = "black", labels = FALSE)
+plot(env15, col = "black", labels = FALSE)
 colfactor <- factor(final_data$Management)
 points(NMDS2, display = "sites", cex = 1, pch = 16, 
-       col = c("#228B22","#7FFF00","#EEB422")[colfactor])
+       col = c("#02401B", "#81A88D", "#D8B70A")[colfactor])
 ordiellipse(NMDS2, final_data$Management, kind = "ehull",  
-            col = c("#228B22","#7FFF00","#EEB422"), lwd = 3)
+            col = c("#02401B", "#81A88D", "#D8B70A"), lwd = 3)
 
 colfactor <- factor(final_data$Vegetation_type)
 points(ord, display = "sites", cex = 1, pch = 16, 
@@ -586,13 +595,20 @@ mean5 <- series.abundance %>%
   mutate(mean_by_group_rare = mean(prop.rare)) %>% 
   mutate(standard_error(prop.rare))
 
+mean6 <- series.abundance %>% filter(!(Transect %in% c("J1", "J2"))) %>% 
+  group_by(year) %>%
+  mutate(mean_by_group_sp = mean(species)) %>% 
+  mutate(standard_error(species)) %>% 
+  mutate(mean_by_group_rare = mean(prop.rare)) %>% 
+  mutate(standard_error(prop.rare))
+
 ### random plots ----
 
 (time_abu <- ggplot() +
-   geom_line(data = mean5, aes(x = year+2013, y = mean_by_group_sp),
+   geom_line(data = mean6, aes(x = year+2013, y = mean_by_group_sp),
              size = 1) +
    #geom_ribbon(data = pred.mm1, aes(ymin = conf.low, ymax = conf.high, x = x+2013), alpha = 0.3) +
-   geom_point(data = series.abundance, aes(x = year + 2013, y = species, colour = Transect),
+   geom_point(data = mean6, aes(x = year + 2013, y = species, colour = Transect),
               alpha = 0.3, size = 2, position = position_jitter(width = .1)) +
    #annotate("text", x = 2017, y = 32, label = "Slope = 0.021, Std. error = 0.008") +  
    #scale_y_continuous(limits = c (-1, 1)) +
@@ -601,9 +617,9 @@ mean5 <- series.abundance %>%
    labs(x = "\nYear", y = "Species Richness\n"))
 
 (time_rare <- ggplot() +
-    geom_line(data = mean5, aes(x = year+2013, y = mean_by_group_rare), size = 1) +
+    geom_line(data = mean6, aes(x = year+2013, y = mean_by_group_rare), size = 1) +
     #geom_ribbon(data = pred.mm1, aes(ymin = conf.low, ymax = conf.high, x = x+2013), alpha = 0.3) +
-    geom_point(data = series.abundance, aes(x = year + 2013, y = prop.rare, colour = Transect),
+    geom_point(data = mean6, aes(x = year + 2013, y = prop.rare, colour = Transect),
                alpha = 0.3, size = 2, position = position_jitter(width = .1)) +
     #annotate("text", x = 2017, y = 32, label = "Slope = 0.021, Std. error = 0.008") +  
     #scale_y_continuous(limits = c (-1, 1)) +
