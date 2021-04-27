@@ -661,38 +661,71 @@ summary(glm6)
 qqnorm(resid(glm6))
 qqline(resid(glm6))
 
-glm7 <- glm(species ~ Management + Vegetation_type + result_F + result_R, #fixed veg and idic
+glm7 <- glmer(species ~ Management + (1|Vegetation_type) + result_F + result_R, #fixed veg and idic
             data = final_data, family = poisson)
 summary(glm7) #0.1287 unm
 
-glm7.2 <- glm(prop_rare ~ Management + Vegetation_type + result_F + result_R, #fixed veg and idic
+glm7.2 <- glmer(prop_rare ~ Management + (1|Vegetation_type) + result_F + result_R, #fixed veg and idic
             data = final_data, family = poisson)
+
+glm7.3 <- glmer.nb(prop_rare ~ Management + (1|Vegetation_type) + result_F + result_R, #fixed veg and idic
+                   data = final_data)
+
+summary(glm7.3)
+
+predict3 <- ggpredict(glm7.3, terms = c("Management"), type = "fe") 
+summary(predict3)
+
+glm7.5 <- glm(prop_rare ~ Management + Vegetation_type + result_F + result_R, #fixed veg and idic
+                data = final_data, family = quasipoisson)
+predict5 <- ggpredict(glm7.5, terms = c("Management"), type = "fe") 
 
 
 glm8 <- glm(species ~ Management + result_F + result_R , #fixed indic
             data = final_data, family = poisson)
 summary(glm8) #0.0382 mowed
 
+
+library(DHARMa)
+library(car)
+library(MASS)
+
+final_data$prop_rare.t <- final_data$prop_rare + 1
+poisson <- fitdistr(final_data$prop_rare.t, "poisson")
+qqp(data$prop_rare.t, "pois", lambda = poisson$estimate)
+
+hist(final_data$prop_rare)
+
 ### plot GLM ----
+cols <- c("Calthion" = "#F1BB7B", "Carex brizoides" = "#FD6467", "Mountain Meadow" = "#5B1A18", "Nardetum" = "#D67236")
+
 predict1 <- ggpredict(glm7, terms = c("Management"), type = "fe") 
 predict2 <- ggpredict(glm7.2, terms = c("Management"), type = "fe") 
+summary(predict2)
 
 (pr_abund <- ggplot()+
-  geom_point(data = final_data, aes(x = Management, y= species, 
-                                    colour = Vegetation_type, alpha = 0.5)) +
-  geom_point(data = predict1, aes(x = x, y = predicted, size = 2)) +
+  geom_point(data = final_data, aes(x = Management, y= species,
+                                    colour = Vegetation_type, alpha = 0.5),
+             position = position_jitter(width = .15)) +
+    guides(alpha = FALSE)+
+  geom_point(data = predict1, aes(x = x, y = predicted, size = 2),show.legend = FALSE)  +
   geom_errorbar(data= predict1, aes(x =x, ymax = conf.high, ymin= conf.low, width = 0.35))+
-  labs(x = "\nManagement", y = "Species Richness\n") + 
+  labs(x = "\nManagement", y = "Predicted Species Richness\n") + 
   theme_classic()+
+  scale_colour_manual(values = cols, aesthetics = c("colour", "fill"), name = "Vegetation type")+
+  
   theme(legend.position = "right"))
+
+cols <- c("Calthion" = "#F1BB7B", "Carex brizoides" = "#FD6467", "Mountain Meadow" = "#5B1A18", "Nardetum" = "#D67236")
 
 (pr_rare <- ggplot()+
     geom_point(data = final_data, aes(x = Management, y= prop_rare, colour = Vegetation_type, 
-                                       alpha = 1)) +
+                                       alpha = 1), position = position_jitter(width = .15)) +
     geom_point(data = predict2, aes(x = x, y = predicted, size = 2)) +
     geom_errorbar(data= predict2, aes(x =x, ymax = conf.high, ymin= conf.low, width = 0.35))+
     labs(x = "\nManagement", y = "Proportion of Red List Species\n") + 
     theme_classic()+
+    scale_colour_manual(values = cols, aesthetics = c("colour", "fill"))+
     theme(legend.position = "right"))
 
 ### Tukey ----
@@ -958,6 +991,7 @@ mod
 
 set.seed(2) 
 indic_nmds <- metaMDS(indic_pca, distance = "bray", autotransform = FALSE)
+indic_nmds <- metaMDS(species, distance = "bray", autotransform = FALSE)
 
 indic_fit <- envfit(indic_nmds, indic_pca, permutations = 999)
 
